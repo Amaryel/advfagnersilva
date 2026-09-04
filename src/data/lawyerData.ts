@@ -17,7 +17,8 @@ export const lawyerProfile: ConfirmedLawyerProfile = {
   pje1gUrl: "https://pje.tjpi.jus.br/1g/",
   pje2gUrl: "https://pje.tjpi.jus.br/2g/",
   oabCnaUrl: "https://cna.oab.org.br/",
-  tjpiUrl: "https://www.tjpi.jus.br/"
+  tjpiUrl: "https://www.tjpi.jus.br/",
+  avatarUrl: "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"
 };
 
 export const casePrecedents: CasePrecedent[] = [

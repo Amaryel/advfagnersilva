@@ -66,5 +66,6 @@ export interface ConfirmedLawyerProfile {
   pje2gUrl: string;
   oabCnaUrl: string;
   tjpiUrl: string;
+  avatarUrl?: string;
 }
 

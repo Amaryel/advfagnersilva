@@ -25,8 +25,8 @@ export const Contato: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
-  // Contact Method: 'email' | 'whatsapp'
-  const [activeTab, setActiveTab] = useState<'email' | 'whatsapp'>('email');
+  // Contact Method: 'whatsapp' | 'email' (WhatsApp default for speed)
+  const [activeTab, setActiveTab] = useState<'whatsapp' | 'email'>('whatsapp');
 
   // Email form states
   const [name, setName] = useState('');
@@ -94,524 +94,377 @@ export const Contato: React.FC = () => {
   };
 
   return (
-    <div id="contato-page-root" className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 space-y-12 ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>
+    <div id="contato-page-root" className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16 space-y-12 ${
+      isDark ? 'text-[#e2e8f0]' : 'text-[#1e293b]'
+    }`}>
       
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`border-b pb-8 space-y-3 ${isDark ? 'border-[#1c273c]' : 'border-[#cbd5e1]'}`}
+        className={`border-b pb-8 space-y-3 ${isDark ? 'border-[#1c273c]' : 'border-[#ebdcc9]'}`}
       >
-        <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#c5a880] font-semibold">
+        <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#b89058] font-bold">
           <PhoneCall className="w-4 h-4" />
-          <span>Central de Contato & Plantão Jurídico</span>
+          <span>Atendimento Direto & Plantão 24h</span>
         </div>
-        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold">
-          Fale com o <span className="gold-gradient-text">Dr. Fagner Silva</span>
+        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0f2137] dark:text-[#f8fafc]">
+          Canais de Contato com o <span className="gold-gradient-text">Dr. Fagner Silva</span>
         </h1>
         <p className={`text-sm sm:text-base max-w-3xl leading-relaxed ${isDark ? 'text-[#94a3b8]' : 'text-[#475569]'}`}>
-          Envie sua dúvida jurídica para resposta oficial por e-mail ou acione o plantão criminal 24 horas para casos de flagrantes, custódia e urgências em Isaías Coelho e região.
+          Para urgências penais (prisões em flagrante e custódias), acione o WhatsApp de plantão ou o telefone direto para resposta imediata.
         </p>
       </motion.div>
 
-      {/* Main Grid: Direct Contacts + Forms */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Grid: Info Column vs Interactive Contact Form */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         
-        {/* Left Column: Direct Contacts & Channels */}
+        {/* Left Column: Direct Phone / Location / Instagram */}
         <div className="lg:col-span-5 space-y-6">
           
-          {/* Emergency Box */}
-          <div className="rounded-xl bg-gradient-to-br from-red-950/60 via-[#101420] to-[#0c0f18] border border-red-800/60 p-6 space-y-4 shadow-xl text-white">
-            <div className="flex items-center gap-2 text-red-400 text-xs font-mono uppercase tracking-wider font-semibold">
-              <ShieldAlert className="w-4 h-4" />
-              <span>Plantão Criminal 24h para Urgências</span>
+          {/* Urgent Phone Box */}
+          <div className={`p-6 sm:p-8 rounded-3xl border shadow-xl space-y-4 interactive-card ${
+            isDark ? 'bg-[#101726] border-[#22334f]' : 'bg-white border-[#ebdcc9]'
+          }`}>
+            <div className="flex items-center gap-3">
+              <div className="soft-icon-pod !p-3">
+                <PhoneCall className="w-6 h-6 text-[#b89058]" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#b89058] font-bold block">
+                  Plantão Criminal 24h
+                </span>
+                <a href={`tel:${lawyerProfile.phoneRaw}`} className="font-serif text-xl sm:text-2xl font-bold text-[#0f2137] dark:text-[#f8fafc] hover:text-[#b89058]">
+                  {lawyerProfile.phoneFormatted}
+                </a>
+              </div>
             </div>
-            
-            <h2 className="font-serif text-lg font-bold text-[#f8fafc]">
-              Prisão em andamento, flagrante ou custódia?
-            </h2>
-            
-            <p className="text-xs text-[#cbd5e1] leading-relaxed">
-              O tempo é determinante para a concessão de liberdade. Ligue ou acione o plantão via WhatsApp agora mesmo.
+
+            <p className={`text-xs leading-relaxed ${isDark ? 'text-[#94a3b8]' : 'text-[#475569]'}`}>
+              Atendimento ininterrupto para flagrantes, mandados de busca, prisões preventivas e audiências de custódia na Comarca de Simplício Mendes e região.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-              <a
-                id="contato-emergency-whatsapp-btn"
-                href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal URGENTE!')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 py-3 px-3 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-95"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp 24h</span>
-              </a>
-
-              <a
-                id="contato-emergency-call-btn"
-                href={`tel:${lawyerProfile.phoneRaw}`}
-                className="inline-flex items-center justify-center gap-2 py-3 px-3 rounded-lg bg-gradient-to-r from-red-700 to-amber-700 hover:from-red-600 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg active:scale-95"
-              >
-                <PhoneCall className="w-4 h-4" />
-                <span>Ligar Agora</span>
-              </a>
-            </div>
+            <a
+              id="contato-whatsapp-cta-left"
+              href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal com o escritório.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+            >
+              <MessageSquare className="w-4 h-4 fill-black/20" />
+              <span>Chamar no WhatsApp de Plantão</span>
+            </a>
           </div>
 
-          {/* Official Portals & Social Links */}
-          <div className={`p-6 rounded-xl border space-y-4 text-xs ${
-            isDark ? 'bg-[#0d121c] border-[#1f2d43]' : 'bg-white border-[#e2e8f0] shadow-sm'
+          {/* Location & Social */}
+          <div className={`p-6 rounded-3xl border space-y-4 ${
+            isDark ? 'bg-[#0d121c] border-[#1e2a3f]' : 'bg-[#faf8f5] border-[#ebdcc9]'
           }`}>
-            <h3 className={`font-serif text-base font-bold border-b pb-3 ${
-              isDark ? 'text-[#f1f5f9] border-[#182438]' : 'text-[#0f172a] border-[#cbd5e1]'
-            }`}>
-              Canais & Links Oficiais
-            </h3>
-
-            <div className="space-y-3 pt-1">
-              {/* Instagram */}
-              <a
-                href={lawyerProfile.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center justify-between p-3 rounded-lg border transition-colors group ${
-                  isDark ? 'bg-[#121824] border-[#1f2d43] hover:border-[#c5a880]' : 'bg-[#f8fafc] border-[#cbd5e1] hover:border-[#c5a880]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-[#e1306c]/15 text-[#e1306c]">
-                    <Instagram className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-bold text-xs block text-[#e1306c]">Instagram Oficial</span>
-                    <span className={`text-[11px] ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>@advfagnersilva</span>
-                  </div>
-                </div>
-                <ExternalLink className="w-4 h-4 text-[#64748b] group-hover:text-[#c5a880]" />
-              </a>
-
-              {/* PJe TJ-PI */}
-              <a
-                href={lawyerProfile.pje1gUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center justify-between p-3 rounded-lg border transition-colors group ${
-                  isDark ? 'bg-[#121824] border-[#1f2d43] hover:border-[#c5a880]' : 'bg-[#f8fafc] border-[#cbd5e1] hover:border-[#c5a880]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-[#c5a880]/15 text-[#c5a880]">
-                    <Globe className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-bold text-xs block text-[#c5a880]">PJe TJ-PI (1º Grau)</span>
-                    <span className={`text-[11px] ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>pje.tjpi.jus.br/1g/</span>
-                  </div>
-                </div>
-                <ExternalLink className="w-4 h-4 text-[#64748b] group-hover:text-[#c5a880]" />
-              </a>
-
-              {/* OAB CNA */}
-              <a
-                href={lawyerProfile.oabCnaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center justify-between p-3 rounded-lg border transition-colors group ${
-                  isDark ? 'bg-[#121824] border-[#1f2d43] hover:border-[#c5a880]' : 'bg-[#f8fafc] border-[#cbd5e1] hover:border-[#c5a880]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-blue-500/15 text-blue-400">
-                    <ShieldCheck className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="font-bold text-xs block text-blue-500">Cadastro OAB (CNA)</span>
-                    <span className={`text-[11px] ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>cna.oab.org.br</span>
-                  </div>
-                </div>
-                <ExternalLink className="w-4 h-4 text-[#64748b] group-hover:text-[#c5a880]" />
-              </a>
+            <div className="flex items-start gap-3">
+              <div className="soft-icon-pod !p-2 shrink-0">
+                <MapPin className="w-4 h-4 text-[#b89058]" />
+              </div>
+              <div className="text-xs">
+                <span className="font-bold text-[#0f2137] dark:text-[#f8fafc] block">
+                  Endereço do Escritório
+                </span>
+                <span className={`text-[11px] leading-relaxed block ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
+                  {lawyerProfile.address}
+                </span>
+              </div>
             </div>
-          </div>
 
-          {/* Institutional Address */}
-          <div className={`p-6 rounded-xl border space-y-3 text-xs ${
-            isDark ? 'bg-[#0d121c] border-[#1f2d43]' : 'bg-white border-[#e2e8f0] shadow-sm'
-          }`}>
-            <h3 className={`font-serif text-base font-bold border-b pb-3 ${
-              isDark ? 'text-[#f1f5f9] border-[#182438]' : 'text-[#0f172a] border-[#cbd5e1]'
-            }`}>
-              Gabinete de Atendimento
-            </h3>
-
-            <div className="space-y-3 pt-1">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#c5a880] shrink-0 mt-0.5" />
-                <div>
-                  <span className={`font-semibold block ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>
-                    {lawyerProfile.city} — {lawyerProfile.state}
-                  </span>
-                  <span className={`text-[11px] block mt-0.5 ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
-                    {lawyerProfile.address}
-                  </span>
-                </div>
+            <div className="flex items-start gap-3">
+              <div className="soft-icon-pod !p-2 shrink-0">
+                <Instagram className="w-4 h-4 text-[#e1306c]" />
               </div>
-
-              <div className="flex items-start gap-3">
-                <Landmark className="w-4 h-4 text-[#c5a880] shrink-0 mt-0.5" />
-                <div>
-                  <span className={`font-semibold block ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>
-                    {lawyerProfile.mandate}
-                  </span>
-                  <span className={`text-[11px] block mt-0.5 ${isDark ? 'text-[#64748b]' : 'text-[#64748b]'}`}>
-                    Câmara Municipal de Isaías Coelho
-                  </span>
-                </div>
+              <div className="text-xs">
+                <span className="font-bold text-[#0f2137] dark:text-[#f8fafc] block">
+                  Instagram Oficial
+                </span>
+                <a 
+                  href={lawyerProfile.instagramUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-[#e1306c] hover:underline font-bold"
+                >
+                  {lawyerProfile.instagram}
+                </a>
               </div>
+            </div>
 
-              <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-[#c5a880] shrink-0 mt-0.5" />
-                <div>
-                  <span className={`font-semibold block ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>
-                    E-mail do Escritório
-                  </span>
-                  <span className={`text-[11px] font-mono block mt-0.5 ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
-                    {lawyerProfile.email}
-                  </span>
-                </div>
+            <div className="flex items-start gap-3">
+              <div className="soft-icon-pod !p-2 shrink-0">
+                <Globe className="w-4 h-4 text-[#b89058]" />
+              </div>
+              <div className="text-xs">
+                <span className="font-bold text-[#0f2137] dark:text-[#f8fafc] block">
+                  Processo Judicial Eletrônico
+                </span>
+                <a 
+                  href={lawyerProfile.pje1gUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-[#b89058] hover:underline font-bold"
+                >
+                  PJe TJ-PI (1º e 2º Graus)
+                </a>
               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Right Column: Interactive Contact Channels (Email Form + WhatsApp Form) */}
+        {/* Right Column: Interactive Contact Form (WhatsApp / Email) */}
         <div className="lg:col-span-7">
-          <div className={`p-6 sm:p-8 rounded-xl border shadow-xl space-y-6 ${
-            isDark ? 'bg-[#0d121c] border-[#22314a]' : 'bg-white border-[#cbd5e1]'
+          <div className={`rounded-3xl border p-6 sm:p-8 shadow-xl space-y-6 ${
+            isDark ? 'bg-[#0d121c] border-[#1e2a3f]' : 'bg-white border-[#ebdcc9]'
           }`}>
             
-            {/* Tabs Selector */}
-            <div className="flex items-center justify-between border-b pb-4 gap-2">
-              <div className="flex items-center gap-2">
-                <button
-                  id="tab-select-email"
-                  onClick={() => setActiveTab('email')}
-                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-2 transition-all ${
-                    activeTab === 'email'
-                      ? 'bg-[#c5a880] text-[#070a10] shadow'
-                      : isDark
-                        ? 'bg-[#151c2a] text-[#94a3b8] hover:text-[#f8fafc]'
-                        : 'bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]'
-                  }`}
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>Enviar por E-mail</span>
-                </button>
+            {/* Form Mode Selector */}
+            <div className="flex items-center gap-2 p-1 rounded-2xl border border-current/10 bg-current/5">
+              <button
+                type="button"
+                onClick={() => setActiveTab('whatsapp')}
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 touch-press cursor-pointer select-none ${
+                  activeTab === 'whatsapp'
+                    ? 'bg-[#b89058] text-white shadow-sm'
+                    : 'text-[#64748b] hover:text-[#0f2137] dark:hover:text-white'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>WhatsApp Direto (Mais Rápido)</span>
+              </button>
 
-                <button
-                  id="tab-select-whatsapp"
-                  onClick={() => setActiveTab('whatsapp')}
-                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center gap-2 transition-all ${
-                    activeTab === 'whatsapp'
-                      ? 'bg-[#25D366] text-black shadow'
-                      : isDark
-                        ? 'bg-[#151c2a] text-[#94a3b8] hover:text-[#f8fafc]'
-                        : 'bg-[#f1f5f9] text-[#475569] hover:text-[#0f172a]'
-                  }`}
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Atendimento WhatsApp</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setActiveTab('email')}
+                className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 touch-press cursor-pointer select-none ${
+                  activeTab === 'email'
+                    ? 'bg-[#b89058] text-white shadow-sm'
+                    : 'text-[#64748b] hover:text-[#0f2137] dark:hover:text-white'
+                }`}
+              >
+                <Mail className="w-4 h-4" />
+                <span>Formulário de Mensagem</span>
+              </button>
             </div>
 
-            {/* TAB 1: EMAIL SENDING VIA BACKEND (/api/send-email) */}
-            {activeTab === 'email' && (
-              <form onSubmit={handleSendEmail} className="space-y-4 text-xs">
-                <div>
-                  <h2 className="font-serif text-xl sm:text-2xl font-bold mb-1">
-                    Envie sua Dúvida por E-mail
-                  </h2>
-                  <p className={`text-xs ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
-                    Sua mensagem será encaminhada diretamente para a caixa postal do Dr. Fagner Silva.
-                  </p>
-                </div>
-
-                {/* Status Feedback Banner */}
-                {sendStatus === 'success' && (
-                  <div className="p-4 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-xs">{feedbackMessage}</p>
-                      <p className="text-[11px] mt-1 text-emerald-300/80">
-                        O advogado responderá pelo e-mail ou telefone informado no formulário.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {sendStatus === 'error' && (
-                  <div className="p-4 rounded-lg bg-red-500/15 border border-red-500/40 text-red-400 flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
-                    <div>
-                      <p className="font-bold text-xs">{feedbackMessage}</p>
-                      <a 
-                        href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Tive uma dúvida e gostaria de falar com o senhor.')}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] mt-1.5 underline font-semibold block text-amber-300"
-                      >
-                        Clique aqui para conversar direto no WhatsApp
-                      </a>
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                    Nome Completo *
-                  </label>
-                  <input
-                    id="input-email-name"
-                    type="text"
-                    required
-                    placeholder="Seu nome ou de quem solicita orientação"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                      isDark 
-                        ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                        : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                    }`}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Seu E-mail *
-                    </label>
-                    <input
-                      id="input-email-email"
-                      type="email"
-                      required
-                      placeholder="seuemail@exemplo.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                        isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                      }`}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Telefone / WhatsApp
-                    </label>
-                    <input
-                      id="input-email-phone"
-                      type="tel"
-                      placeholder="(89) 99999-9999"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                        isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                      }`}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Cidade / Comarca
-                    </label>
-                    <input
-                      id="input-email-city"
-                      type="text"
-                      placeholder="Isaías Coelho, Simplício Mendes, Picos..."
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                        isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                      }`}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Assunto da Mensagem
-                    </label>
-                    <select
-                      id="input-email-subject"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                        isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                      }`}
-                    >
-                      <option value="Dúvida Jurídica Criminal">Dúvida Jurídica Criminal</option>
-                      <option value="Intimação para Delegacia">Intimação para Delegacia</option>
-                      <option value="Audiência de Custódia">Audiência de Custódia</option>
-                      <option value="Tribunal do Júri">Tribunal do Júri</option>
-                      <option value="Habeas Corpus / Recursos">Habeas Corpus / Recursos</option>
-                      <option value="Execução Penal / Progressão">Execução Penal / Progressão</option>
-                      <option value="Outros Assuntos">Outros Assuntos</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                    Mensagem / Relato da Dúvida *
-                  </label>
-                  <textarea
-                    id="input-email-message"
-                    rows={4}
-                    required
-                    placeholder="Descreva detalhadamente sua dúvida ou situação jurídica..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
-                      isDark 
-                        ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                        : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
-                    }`}
-                  ></textarea>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    id="btn-submit-email"
-                    type="submit"
-                    disabled={sendStatus === 'loading'}
-                    className="w-full py-3.5 px-6 rounded-lg bg-[#c5a880] hover:bg-[#d4b992] text-[#070a10] font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg active:scale-[0.99] disabled:opacity-50"
-                  >
-                    {sendStatus === 'loading' ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin text-[#070a10]" />
-                        <span>Enviando Mensagem ao Advogado...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4 text-[#070a10]" />
-                        <span>Enviar E-mail para Dr. Fagner Silva</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
-            )}
-
-            {/* TAB 2: WHATSAPP DIRECT */}
+            {/* Tab 1: WhatsApp Fast Dispatch */}
             {activeTab === 'whatsapp' && (
-              <form onSubmit={handleSendWhatsApp} className="space-y-4 text-xs">
-                <div>
-                  <h2 className="font-serif text-xl sm:text-2xl font-bold mb-1">
-                    Atendimento Estruturado no WhatsApp
-                  </h2>
-                  <p className={`text-xs ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
-                    Preencha os dados para iniciar uma conversa prioritária no WhatsApp oficial.
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                    Seu Nome:
+              <form onSubmit={handleSendWhatsApp} className="space-y-4">
+                <div className="space-y-1">
+                  <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                    Seu Nome Completo:
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="Seu nome"
+                    placeholder="Ex: João da Silva"
                     value={waName}
                     onChange={(e) => setWaName(e.target.value)}
-                    className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
+                    className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
                       isDark 
-                        ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                        : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
+                        ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                        : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
                     }`}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Cidade onde ocorreu o fato:
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      Cidade / Comarca:
                     </label>
                     <input
                       type="text"
-                      required
-                      placeholder="Isaías Coelho, PI"
                       value={waCity}
                       onChange={(e) => setWaCity(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
                         isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
                       }`}
                     />
                   </div>
 
-                  <div>
-                    <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                      Natureza do Caso:
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      Tipo de Urgência:
                     </label>
                     <select
                       value={waUrgency}
                       onChange={(e) => setWaUrgency(e.target.value)}
-                      className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
                         isDark 
-                          ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                          : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
                       }`}
                     >
-                      <option value="Prisão em Flagrante / Plantão 24h">Prisão em Flagrante (Urgência 24h)</option>
-                      <option value="Intimação Policial para Depoimento">Intimação para Delegacia</option>
+                      <option value="Prisão em Flagrante / Plantão 24h">Prisão em Flagrante / Plantão 24h</option>
                       <option value="Audiência de Custódia">Audiência de Custódia</option>
+                      <option value="Intimação Policial / Inquérito">Intimação Policial / Inquérito</option>
                       <option value="Tribunal do Júri">Tribunal do Júri</option>
-                      <option value="Habeas Corpus">Habeas Corpus</option>
-                      <option value="Execução Penal">Execução Penal</option>
-                      <option value="Consulta Geral">Consulta Geral</option>
+                      <option value="Execução Penal / Progressão">Execução Penal / Progressão</option>
+                      <option value="Outro Assunto Criminal">Outro Assunto Criminal</option>
                     </select>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block font-semibold mb-1 uppercase tracking-wider text-[11px]">
-                    Breve resumo do caso:
+                <div className="space-y-1">
+                  <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                    Resumo do Caso:
                   </label>
                   <textarea
                     rows={4}
-                    placeholder="Descreva resumidamente o que aconteceu..."
+                    placeholder="Descreva resumidamente o que aconteceu ou qual informação você necessita..."
                     value={waDetails}
                     onChange={(e) => setWaDetails(e.target.value)}
-                    className={`w-full px-4 py-2.5 rounded-lg border outline-none transition-colors ${
+                    className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
                       isDark 
-                        ? 'bg-[#121927] border-[#23314d] focus:border-[#c5a880] text-[#f8fafc]' 
-                        : 'bg-[#f8fafc] border-[#cbd5e1] focus:border-[#c5a880] text-[#0f172a]'
+                        ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                        : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
                     }`}
-                  ></textarea>
+                  />
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 px-6 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg active:scale-[0.99]"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>Iniciar Conversa no WhatsApp</span>
-                  </button>
+                <button
+                  type="submit"
+                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                >
+                  <MessageSquare className="w-4 h-4 fill-black/20" />
+                  <span>Enviar Mensagem Formatada no WhatsApp</span>
+                </button>
+              </form>
+            )}
+
+            {/* Tab 2: Email Form */}
+            {activeTab === 'email' && (
+              <form onSubmit={handleSendEmail} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      Nome:
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Seu nome"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
+                        isDark 
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
+                      }`}
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      E-mail:
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="seu@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
+                        isDark 
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
+                      }`}
+                    />
+                  </div>
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      Telefone / WhatsApp:
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="(89) 99999-9999"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
+                        isDark 
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
+                      }`}
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                      Assunto:
+                    </label>
+                    <input
+                      type="text"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
+                        isDark 
+                          ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                          : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[11px] font-mono uppercase font-bold text-[#64748b] block">
+                    Mensagem:
+                  </label>
+                  <textarea
+                    rows={4}
+                    required
+                    placeholder="Descreva sua dúvida ou solicitação..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className={`w-full px-4 py-3 rounded-2xl border text-xs focus:outline-none transition-all ${
+                      isDark 
+                        ? 'bg-[#101624] border-[#223049] text-[#f8fafc] focus:border-[#c5a880]' 
+                        : 'bg-[#faf8f5] border-[#ebdcc9] text-[#0f2137] focus:border-[#b89058]'
+                    }`}
+                  />
+                </div>
+
+                {sendStatus === 'success' && (
+                  <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 text-xs font-bold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>{feedbackMessage}</span>
+                  </div>
+                )}
+
+                {sendStatus === 'error' && (
+                  <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-600 text-xs font-bold flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{feedbackMessage}</span>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={sendStatus === 'loading'}
+                  className="w-full py-4 px-6 rounded-2xl bg-[#b89058] hover:bg-[#a0773d] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                >
+                  {sendStatus === 'loading' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Enviando Mensagem...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Enviar Mensagem ao Escritório</span>
+                    </>
+                  )}
+                </button>
               </form>
             )}
 

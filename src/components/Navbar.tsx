@@ -11,7 +11,8 @@ import {
   Sun, 
   Moon, 
   Instagram, 
-  Globe
+  Globe,
+  MessageSquare
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -36,11 +37,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
 
   const navItems: { label: string; route: AppRoute; path: string }[] = [
     { label: 'Início', route: 'home', path: '/' },
-    { label: 'Sobre', route: 'sobrenos', path: '/sobrenos' },
-    { label: 'Atuação', route: 'atuacao', path: '/atuacao' },
+    { label: 'Sobre o Advogado', route: 'sobrenos', path: '/sobrenos' },
+    { label: 'Áreas de Atuação', route: 'atuacao', path: '/atuacao' },
     { label: 'Casos & PJe', route: 'casos', path: '/casos' },
-    { label: 'Conteúdos', route: 'conteudos', path: '/conteudos' },
-    { label: 'FAQ', route: 'faq', path: '/faq' },
+    { label: 'Artigos & Orientações', route: 'conteudos', path: '/conteudos' },
+    { label: 'Dúvidas (FAQ)', route: 'faq', path: '/faq' },
     { label: 'Contato', route: 'contato', path: '/contato' },
   ];
 
@@ -59,20 +60,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
         className={`text-xs py-2 px-4 transition-colors ${
           isDark 
             ? 'bg-[#0f1420] border-b border-[#1e293d] text-[#94a3b8]' 
-            : 'bg-[#f1f5f9] border-b border-[#e2e8f0] text-[#475569]'
+            : 'bg-[#faf6f0] border-b border-[#ebdcc9] text-[#554228]'
         }`}
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className={`font-semibold ${isDark ? 'text-[#cbd5e1]' : 'text-[#0f172a]'}`}>
+            <span className={`font-bold ${isDark ? 'text-[#cbd5e1]' : 'text-[#2b1f0d]'}`}>
               Plantão Criminal 24h:
             </span>
-            <span className="hidden md:inline">
-              Isaías Coelho • Comarca de Simplício Mendes • Todo o Piauí
+            <span className="hidden md:inline font-medium">
+              Isaías Coelho • Simplício Mendes • Todo o Piauí
             </span>
           </div>
 
@@ -83,14 +84,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium touch-press"
+              className="flex items-center gap-1.5 hover:text-[#b89058] transition-colors font-semibold touch-press"
               title="Instagram @advfagnersilva"
             >
               <Instagram className="w-3.5 h-3.5 text-[#e1306c]" />
               <span className="hidden sm:inline">@advfagnersilva</span>
             </a>
 
-            <span className={isDark ? 'text-[#334155]' : 'text-[#cbd5e1]'}>|</span>
+            <span className={isDark ? 'text-[#334155]' : 'text-[#d9cbba]'}>|</span>
 
             {/* PJe TJPI link */}
             <a
@@ -98,23 +99,23 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.pje1gUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium touch-press"
+              className="flex items-center gap-1.5 hover:text-[#b89058] transition-colors font-semibold touch-press"
               title="Acessar PJe TJ-PI"
             >
-              <Globe className="w-3.5 h-3.5 text-[#c5a880]" />
+              <Globe className="w-3.5 h-3.5 text-[#b89058]" />
               <span>PJe TJ-PI</span>
             </a>
 
-            <span className={isDark ? 'text-[#334155]' : 'text-[#cbd5e1]'}>|</span>
+            <span className={isDark ? 'text-[#334155]' : 'text-[#d9cbba]'}>|</span>
 
             <a 
               id="topbar-phone-link"
               href={`tel:${lawyerProfile.phoneRaw}`} 
-              className={`hover:text-[#c5a880] transition-colors flex items-center gap-1.5 font-semibold touch-press ${
-                isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'
+              className={`hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-bold touch-press ${
+                isDark ? 'text-[#e2e8f0]' : 'text-[#0f2137]'
               }`}
             >
-              <PhoneCall className="w-3.5 h-3.5 text-[#c5a880]" />
+              <PhoneCall className="w-3.5 h-3.5 text-[#b89058]" />
               <span>{lawyerProfile.phoneFormatted}</span>
             </a>
           </div>
@@ -128,10 +129,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
           scrolled 
             ? isDark 
               ? 'bg-[#0b0e14]/95 backdrop-blur-md border-b border-[#1f293d] shadow-xl py-3' 
-              : 'bg-white/95 backdrop-blur-md border-b border-[#e2e8f0] shadow-md py-3'
+              : 'bg-white/95 backdrop-blur-md border-b border-[#ebdcc9] shadow-md py-3'
             : isDark
-              ? 'bg-[#0b0e14]/85 backdrop-blur-sm border-b border-[#171e2e] py-4'
-              : 'bg-white/90 backdrop-blur-sm border-b border-[#e2e8f0] py-4'
+              ? 'bg-[#0b0e14]/85 backdrop-blur-sm border-b border-[#171e2e] py-3.5'
+              : 'bg-[#fcfaf7]/90 backdrop-blur-sm border-b border-[#ebdcc9] py-3.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -141,22 +142,16 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-3 text-left group focus:outline-none touch-press cursor-pointer select-none"
           >
-            <div className={`w-10 h-10 rounded-xl border flex items-center justify-center text-[#c5a880] shadow-sm transition-all duration-300 group-hover:scale-105 ${
-              isDark 
-                ? 'bg-[#151c2a] border-[#c5a880]/40 group-hover:border-[#c5a880]' 
-                : 'bg-[#faf7f2] border-[#c5a880] group-hover:bg-[#f5eee3]'
-            }`}>
-              <Scale className="w-5 h-5 stroke-[1.8]" />
+            <div className="soft-icon-pod !p-2.5 !rounded-2xl">
+              <Scale className="w-5 h-5 stroke-[1.5]" />
             </div>
             <div>
-              <div className="font-serif tracking-wide text-sm uppercase font-bold flex items-center gap-1.5">
-                <span className={isDark ? 'text-[#f8fafc]' : 'text-[#0f172a]'}>
-                  Dr. Fagner Silva
-                </span>
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
+              <div className="font-serif tracking-wide text-base uppercase font-bold flex items-center gap-1.5 text-[#0f2137] dark:text-[#f8fafc]">
+                <span>Dr. Fagner Silva</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#b89058]"></span>
               </div>
-              <p className={`text-[11px] tracking-wider uppercase font-medium ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
-                Advocacia Criminal • Isaías Coelho/PI
+              <p className={`text-[11px] tracking-wider uppercase font-semibold ${isDark ? 'text-[#94a3b8]' : 'text-[#8c642b]'}`}>
+                Advocacia Criminal • Isaías Coelho / PI
               </p>
             </div>
           </button>
@@ -170,17 +165,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   key={item.route}
                   id={`nav-link-${item.route}`}
                   onClick={() => handleNavClick(item.route)}
-                  className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all relative touch-press cursor-pointer select-none ${
+                  className={`px-3 py-2 text-xs uppercase tracking-wider font-bold transition-all relative touch-press cursor-pointer select-none ${
                     isActive
-                      ? 'text-[#c5a880]'
+                      ? 'text-[#b89058]'
                       : isDark
-                        ? 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#141b28]/60 rounded-lg'
-                        : 'text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9] rounded-lg'
+                        ? 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#141b28]/60 rounded-xl'
+                        : 'text-[#475569] hover:text-[#0f2137] hover:bg-[#f4ece0]/60 rounded-xl'
                   }`}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#c5a880] rounded-full" />
+                    <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#b89058] rounded-full" />
                   )}
                 </button>
               );
@@ -194,15 +189,15 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               id="theme-toggle-btn"
               onClick={toggleTheme}
               aria-label={isDark ? 'Ativar tema claro' : 'Ativar tema escuro'}
-              className={`p-2 rounded-xl border transition-all flex items-center gap-1.5 text-xs font-medium touch-press cursor-pointer select-none ${
+              className={`p-2 rounded-2xl border transition-all flex items-center gap-1.5 text-xs font-semibold touch-press cursor-pointer select-none ${
                 isDark 
                   ? 'bg-[#141c2b] border-[#223049] text-amber-300 hover:bg-[#1c273c]' 
-                  : 'bg-[#f1f5f9] border-[#cbd5e1] text-slate-700 hover:bg-[#e2e8f0]'
+                  : 'bg-white border-[#ebdcc9] text-slate-700 hover:bg-[#faf7f2] shadow-sm'
               }`}
               title={isDark ? 'Mudar para Tema Claro' : 'Mudar para Tema Escuro'}
             >
               {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
-              <span className="hidden md:inline text-[11px] font-semibold">
+              <span className="hidden md:inline text-[11px] font-bold">
                 {isDark ? 'Claro' : 'Escuro'}
               </span>
             </button>
@@ -213,10 +208,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`hidden sm:flex p-2 rounded-xl border transition-all items-center justify-center touch-press ${
+              className={`hidden sm:flex p-2 rounded-2xl border transition-all items-center justify-center touch-press ${
                 isDark
                   ? 'bg-[#141c2b] border-[#223049] text-[#e1306c] hover:bg-[#1c273c]'
-                  : 'bg-[#f1f5f9] border-[#cbd5e1] text-[#e1306c] hover:bg-[#e2e8f0]'
+                  : 'bg-white border-[#ebdcc9] text-[#e1306c] hover:bg-[#faf7f2] shadow-sm'
               }`}
               title="Instagram @advfagnersilva"
             >
@@ -229,20 +224,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal com o escritório.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#c5a880] hover:bg-[#d4b992] text-[#0b0e14] font-bold text-xs tracking-wider uppercase transition-all shadow-md btn-shimmer touch-press cursor-pointer select-none"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs tracking-wider uppercase transition-all shadow-md btn-shimmer touch-press cursor-pointer select-none"
             >
-              <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
-              <span>Falar no WhatsApp</span>
+              <MessageSquare className="w-4 h-4 fill-black/20" />
+              <span>WhatsApp Plantão</span>
             </a>
 
             {/* Mobile Menu Button */}
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`xl:hidden p-2 rounded-xl border focus:outline-none transition-all touch-press ${
+              className={`xl:hidden p-2 rounded-2xl border focus:outline-none transition-all touch-press ${
                 isDark 
                   ? 'border-[#223049] text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#161f30]' 
-                  : 'border-[#cbd5e1] text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9]'
+                  : 'border-[#ebdcc9] text-[#475569] hover:text-[#0f2137] bg-white shadow-sm'
               }`}
               aria-label="Abrir menu de navegação"
             >
@@ -256,10 +251,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
           <div 
             id="mobile-nav-drawer" 
             className={`xl:hidden border-t px-4 pt-4 pb-6 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 ${
-              isDark ? 'border-[#1e293b] bg-[#0b0e14]' : 'border-[#e2e8f0] bg-white'
+              isDark ? 'border-[#1e293b] bg-[#0b0e14]' : 'border-[#ebdcc9] bg-white'
             }`}
           >
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-1.5">
               {navItems.map((item) => {
                 const isActive = currentRoute === item.route;
                 return (
@@ -267,35 +262,35 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                     key={item.route}
                     id={`mobile-nav-link-${item.route}`}
                     onClick={() => handleNavClick(item.route)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm uppercase tracking-wider font-semibold text-left transition-all touch-press cursor-pointer select-none ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-2xl text-xs uppercase tracking-wider font-bold text-left transition-all touch-press cursor-pointer select-none ${
                       isActive
                         ? isDark 
                           ? 'bg-[#182133] text-[#c5a880] border-l-4 border-[#c5a880]' 
-                          : 'bg-[#faf5ed] text-[#8b6225] border-l-4 border-[#c5a880]'
+                          : 'bg-[#faf5ed] text-[#8c642b] border-l-4 border-[#b89058]'
                         : isDark 
                           ? 'text-[#94a3b8] hover:bg-[#131b2a] hover:text-[#f8fafc]' 
-                          : 'text-[#475569] hover:bg-[#f8fafc] hover:text-[#0f172a]'
+                          : 'text-[#475569] hover:bg-[#faf7f2] hover:text-[#0f2137]'
                     }`}
                   >
                     <span>{item.label}</span>
-                    <span className="text-xs font-mono text-[#64748b] lowercase">{item.path}</span>
+                    <span className="text-[11px] font-mono text-[#64748b] lowercase">{item.path}</span>
                   </button>
                 );
               })}
             </div>
 
-            <div className={`mt-5 pt-4 border-t flex flex-col gap-2.5 ${isDark ? 'border-[#1e293b]' : 'border-[#e2e8f0]'}`}>
+            <div className={`mt-5 pt-4 border-t flex flex-col gap-3 ${isDark ? 'border-[#1e293b]' : 'border-[#ebdcc9]'}`}>
               {/* Instagram & PJe buttons */}
               <div className="grid grid-cols-2 gap-2">
                 <a
                   href={lawyerProfile.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
-                    isDark ? 'border-[#223049] text-[#e1306c] bg-[#121824]' : 'border-[#cbd5e1] text-[#e1306c] bg-[#f8fafc]'
+                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl border text-xs font-bold touch-press ${
+                    isDark ? 'border-[#223049] text-[#e1306c] bg-[#121824]' : 'border-[#ebdcc9] text-[#e1306c] bg-[#faf7f2]'
                   }`}
                 >
-                  <Instagram className="w-3.5 h-3.5" />
+                  <Instagram className="w-4 h-4" />
                   <span>Instagram</span>
                 </a>
 
@@ -303,11 +298,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   href={lawyerProfile.pje1gUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
-                    isDark ? 'border-[#223049] text-[#c5a880] bg-[#121824]' : 'border-[#cbd5e1] text-[#8b6225] bg-[#f8fafc]'
+                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl border text-xs font-bold touch-press ${
+                    isDark ? 'border-[#223049] text-[#c5a880] bg-[#121824]' : 'border-[#ebdcc9] text-[#8c642b] bg-[#faf7f2]'
                   }`}
                 >
-                  <Globe className="w-3.5 h-3.5" />
+                  <Globe className="w-4 h-4" />
                   <span>PJe TJ-PI</span>
                 </a>
               </div>
@@ -317,22 +312,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                 href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal em regime de urgência.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#c5a880] text-[#0b0e14] text-xs uppercase tracking-wider font-bold shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black text-xs uppercase tracking-wider font-bold shadow-lg btn-shimmer touch-press cursor-pointer select-none"
               >
-                <ShieldAlert className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4 fill-black/20" />
                 <span>Atendimento no WhatsApp</span>
               </a>
 
               <a
                 id="mobile-direct-call"
                 href={`tel:${lawyerProfile.phoneRaw}`}
-                className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border text-xs uppercase tracking-wider font-semibold transition-colors touch-press cursor-pointer select-none ${
+                className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-xs uppercase tracking-wider font-bold transition-colors touch-press cursor-pointer select-none ${
                   isDark 
                     ? 'border-[#2d3a52] text-[#cbd5e1] hover:bg-[#131b2a]' 
-                    : 'border-[#cbd5e1] text-[#334155] hover:bg-[#f1f5f9]'
+                    : 'border-[#ebdcc9] text-[#0f2137] bg-white hover:bg-[#faf7f2]'
                 }`}
               >
-                <PhoneCall className="w-3.5 h-3.5 text-[#c5a880]" />
+                <PhoneCall className="w-4 h-4 text-[#b89058]" />
                 <span>Ligar: {lawyerProfile.phoneFormatted}</span>
               </a>
             </div>

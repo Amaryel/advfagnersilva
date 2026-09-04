@@ -14,7 +14,8 @@ import {
   Landmark,
   Instagram,
   Globe,
-  BookOpen
+  BookOpen,
+  MessageSquare
 } from 'lucide-react';
 
 interface FooterProps {
@@ -36,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
       className={`border-t pt-16 pb-12 transition-colors ${
         isDark 
           ? 'bg-[#06090f] border-[#182335] text-[#94a3b8]' 
-          : 'bg-[#f1f5f9] border-[#cbd5e1] text-[#475569]'
+          : 'bg-[#faf6f0] border-[#ebdcc9] text-[#475569]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,32 +46,30 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           {/* Col 1: Brand & Institutional Overview */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-md border flex items-center justify-center text-[#c5a880] shadow-sm ${
-                isDark ? 'bg-[#121927] border-[#c5a880]/40' : 'bg-white border-[#c5a880]'
-              }`}>
-                <Scale className="w-5 h-5" />
+              <div className="soft-icon-pod !p-2.5 !rounded-2xl">
+                <Scale className="w-5 h-5 stroke-[1.5]" />
               </div>
               <div>
                 <h3 className={`font-serif text-base tracking-wide uppercase font-bold ${
-                  isDark ? 'text-[#f8fafc]' : 'text-[#0f172a]'
+                  isDark ? 'text-[#f8fafc]' : 'text-[#0f2137]'
                 }`}>
                   Dr. Fagner Silva
                 </h3>
-                <p className="text-[11px] text-[#c5a880] tracking-wider uppercase font-semibold">
+                <p className="text-[11px] text-[#b89058] tracking-wider uppercase font-bold">
                   Advogado Criminalista • Isaías Coelho/PI
                 </p>
               </div>
             </div>
 
             <p className="text-xs leading-relaxed">
-              Defesa penal técnica, estratégica e intransigente em favor das garantias constitucionais, do devido processo legal e da liberdade individual em todas as instâncias judiciais.
+              Defesa penal técnica, estratégica e intransigente em favor das garantias constitucionais, do devido processo legal e da liberdade individual perante o TJ-PI e tribunais superiores.
             </p>
 
-            <div className={`p-3.5 rounded-lg border text-xs space-y-1.5 ${
-              isDark ? 'bg-[#0d131f] border-[#1e293b]' : 'bg-white border-[#e2e8f0]'
+            <div className={`p-4 rounded-2xl border text-xs space-y-1.5 ${
+              isDark ? 'bg-[#0d131f] border-[#1e293b]' : 'bg-white border-[#ebdcc9] shadow-sm'
             }`}>
-              <div className={`flex items-center gap-2 font-semibold ${isDark ? 'text-[#cbd5e1]' : 'text-[#0f172a]'}`}>
-                <Landmark className="w-3.5 h-3.5 text-[#c5a880]" />
+              <div className={`flex items-center gap-2 font-bold ${isDark ? 'text-[#cbd5e1]' : 'text-[#0f2137]'}`}>
+                <Landmark className="w-4 h-4 text-[#b89058]" />
                 <span>Atuação Institucional & Comunitária</span>
               </div>
               <p className={`text-[11px] leading-relaxed ${isDark ? 'text-[#64748b]' : 'text-[#64748b]'}`}>
@@ -85,11 +84,11 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 href={lawyerProfile.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
-                  isDark ? 'bg-[#111724] border-[#22304a] text-[#e1306c] hover:bg-[#1a2336]' : 'bg-white border-[#cbd5e1] text-[#e1306c] hover:bg-[#f8fafc]'
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold transition-all touch-press ${
+                  isDark ? 'bg-[#111724] border-[#22304a] text-[#e1306c] hover:bg-[#1a2336]' : 'bg-white border-[#ebdcc9] text-[#e1306c] hover:bg-[#faf7f2] shadow-sm'
                 }`}
               >
-                <Instagram className="w-3.5 h-3.5" />
+                <Instagram className="w-4 h-4" />
                 <span>@advfagnersilva</span>
               </a>
 
@@ -98,11 +97,11 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 href={lawyerProfile.pje1gUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors ${
-                  isDark ? 'bg-[#111724] border-[#22304a] text-[#c5a880] hover:bg-[#1a2336]' : 'bg-white border-[#cbd5e1] text-[#8b6225] hover:bg-[#f8fafc]'
+                className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs font-bold transition-all touch-press ${
+                  isDark ? 'bg-[#111724] border-[#22304a] text-[#c5a880] hover:bg-[#1a2336]' : 'bg-white border-[#ebdcc9] text-[#8c642b] hover:bg-[#faf7f2] shadow-sm'
                 }`}
               >
-                <Globe className="w-3.5 h-3.5" />
+                <Globe className="w-4 h-4" />
                 <span>PJe TJ-PI</span>
               </a>
             </div>
@@ -111,7 +110,7 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           {/* Col 2: Navigation Map */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className={`text-xs font-serif uppercase tracking-widest font-bold border-b pb-2 ${
-              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f172a] border-[#cbd5e1]'
+              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f2137] border-[#ebdcc9]'
             }`}>
               Navegação
             </h4>
@@ -120,9 +119,9 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 <button 
                   id="footer-link-home"
                   onClick={() => handleNav('home')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
                   <span>Início</span>
                 </button>
               </li>
@@ -130,9 +129,9 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 <button 
                   id="footer-link-sobrenos"
                   onClick={() => handleNav('sobrenos')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
                   <span>Sobre o Advogado</span>
                 </button>
               </li>
@@ -140,9 +139,9 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 <button 
                   id="footer-link-atuacao"
                   onClick={() => handleNav('atuacao')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
                   <span>Áreas de Atuação</span>
                 </button>
               </li>
@@ -150,29 +149,29 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 <button 
                   id="footer-link-casos"
                   onClick={() => handleNav('casos')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5 font-semibold text-[#c5a880]"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
-                  <span>Casos & PJe TJ-PI</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
+                  <span>Casos & PJe</span>
                 </button>
               </li>
               <li>
                 <button 
                   id="footer-link-conteudos"
                   onClick={() => handleNav('conteudos')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
-                  <span>Conteúdos & Artigos</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
+                  <span>Artigos & Orientações</span>
                 </button>
               </li>
               <li>
                 <button 
                   id="footer-link-faq"
                   onClick={() => handleNav('faq')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
                   <span>Perguntas Frequentes</span>
                 </button>
               </li>
@@ -180,144 +179,117 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                 <button 
                   id="footer-link-contato"
                   onClick={() => handleNav('contato')} 
-                  className="hover:text-[#c5a880] transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#b89058] transition-colors flex items-center gap-1.5 font-medium"
                 >
-                  <ArrowUpRight className="w-3 h-3 text-[#c5a880]" />
-                  <span>Central de Contato</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#b89058]" />
+                  <span>Contato & Plantão</span>
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Práticas Criminais */}
+          {/* Col 3: Specializations */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className={`text-xs font-serif uppercase tracking-widest font-bold border-b pb-2 ${
-              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f172a] border-[#cbd5e1]'
+              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f2137] border-[#ebdcc9]'
             }`}>
-              Atuação Penal
+              Especialidades Penais
             </h4>
             <ul className="space-y-2 text-xs">
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Prisões em Flagrante & Custódia (24h)</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Flagrantes & Delegacia de Polícia</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Inquéritos & Investigação Policial</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Audiência de Custódia TJ-PI</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Tribunal do Júri (Crimes Dolosos)</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Habeas Corpus & Liminares</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Habeas Corpus & Recursos no TJ-PI/STJ</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Tribunal do Júri (Plenário)</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Acordo de Não Persecução Penal (ANPP)</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Execução Penal & Progressão</span>
               </li>
               <li className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c5a880]"></span>
-                <span>Execução Penal & Progressão de Regime</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#b89058]" />
+                <span>Acordo de Não Persecução (ANPP)</span>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Contato & Plantão */}
+          {/* Col 4: Contact & Emergency Plantão */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className={`text-xs font-serif uppercase tracking-widest font-bold border-b pb-2 ${
-              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f172a] border-[#cbd5e1]'
+              isDark ? 'text-[#f1f5f9] border-[#1e293b]' : 'text-[#0f2137] border-[#ebdcc9]'
             }`}>
-              Plantão 24 Horas
+              Plantão & Atendimento
             </h4>
-
-            <div className="space-y-2.5 text-xs">
-              <a 
-                id="footer-whatsapp-btn"
-                href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de atendimento criminal pelo site.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`p-3 rounded-lg border flex items-center justify-between transition-all group ${
-                  isDark 
-                    ? 'bg-[#111827] border-[#233149] hover:border-[#c5a880] text-[#f8fafc]' 
-                    : 'bg-white border-[#cbd5e1] hover:border-[#c5a880] text-[#0f172a] shadow-sm'
-                }`}
-              >
-                <div>
-                  <div className="text-[10px] uppercase font-mono text-[#c5a880] font-semibold">WhatsApp de Plantão</div>
-                  <div className="font-bold text-sm">{lawyerProfile.phoneFormatted}</div>
+            <div className="space-y-3 text-xs">
+              <div className="flex items-start gap-2.5">
+                <div className="soft-icon-pod !p-1.5 shrink-0 mt-0.5">
+                  <Phone className="w-3.5 h-3.5" />
                 </div>
-                <ExternalLink className="w-4 h-4 text-[#c5a880] group-hover:scale-110 transition-transform" />
-              </a>
-
-              <div className="flex items-start gap-2.5 text-xs pt-1">
-                <MapPin className="w-4 h-4 text-[#c5a880] shrink-0 mt-0.5" />
                 <div>
-                  <span className={`font-semibold block ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>Localização:</span>
-                  <span>{lawyerProfile.city} — {lawyerProfile.state}</span>
-                  <p className="text-[10px] font-mono text-[#64748b] mt-0.5">{lawyerProfile.address}</p>
+                  <span className="block font-bold text-[#0f2137] dark:text-[#f8fafc]">
+                    Plantão Telefônico 24 Horas
+                  </span>
+                  <a href={`tel:${lawyerProfile.phoneRaw}`} className="text-[#b89058] font-bold hover:underline">
+                    {lawyerProfile.phoneFormatted}
+                  </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-2.5 text-xs">
-                <Mail className="w-4 h-4 text-[#c5a880] shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5">
+                <div className="soft-icon-pod !p-1.5 shrink-0 mt-0.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                </div>
                 <div>
-                  <span className={`font-semibold block ${isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'}`}>E-mail de Contato:</span>
-                  <span className="text-[11px] font-mono text-[#64748b]">{lawyerProfile.email}</span>
+                  <span className="block font-bold text-[#0f2137] dark:text-[#f8fafc]">
+                    Comarca de Atuação
+                  </span>
+                  <span className="text-[11px] leading-tight block">
+                    {lawyerProfile.address}
+                  </span>
                 </div>
               </div>
 
-              <div className={`flex items-center gap-2 text-xs pt-1 font-semibold ${isDark ? 'text-[#cbd5e1]' : 'text-[#0f172a]'}`}>
-                <Clock className="w-4 h-4 text-amber-500 shrink-0" />
-                <span>Plantão de Flagrantes: Disponibilidade 24h</span>
+              <div className="pt-2">
+                <a
+                  id="footer-whatsapp-plantao-btn"
+                  href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal de urgência.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+                >
+                  <MessageSquare className="w-4 h-4 fill-black/20" />
+                  <span>WhatsApp de Plantão</span>
+                </a>
               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Legal Disclaimer & Compliance */}
-        <div className={`border-t pt-8 text-[11px] space-y-3 leading-relaxed ${
-          isDark ? 'border-[#182030] text-[#64748b]' : 'border-[#cbd5e1] text-[#64748b]'
+        {/* Bottom Bar with Regulatory Notice */}
+        <div className={`pt-8 border-t flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] ${
+          isDark ? 'border-[#182335] text-[#64748b]' : 'border-[#ebdcc9] text-[#64748b]'
         }`}>
-          <div className={`flex items-center gap-2 font-semibold ${isDark ? 'text-[#94a3b8]' : 'text-[#334155]'}`}>
-            <ShieldCheck className="w-4 h-4 text-[#c5a880]" />
-            <span>Nota de Conformidade Ética — OAB/CFOAB & Provimento nº 205/2021</span>
+          <div>
+            © {new Date().getFullYear()} Dr. Fagner Silva Advocacia Criminal. Todos os direitos reservados.
           </div>
-          <p>
-            Este portal possui caráter estritamente institucional e informativo sobre garantias processuais e direitos penais, em conformidade com o Código de Ética e Disciplina da OAB. O exercício da advocacia é atividade de meio.
-          </p>
-          <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t text-[10px] ${
-            isDark ? 'border-[#121824] text-[#475569]' : 'border-[#e2e8f0] text-[#64748b]'
-          }`}>
-            <p>
-              © {new Date().getFullYear()} Dr. Fagner Silva • Advocacia Criminal • Isaías Coelho/PI
-            </p>
-            <div className="flex items-center gap-3">
-              <a 
-                href={lawyerProfile.oabCnaUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="hover:text-[#c5a880] transition-colors underline"
-              >
-                Consulta Cadastro Nacional de Advogados (CNA/OAB)
-              </a>
-              <span>•</span>
-              <a 
-                href={lawyerProfile.pje1gUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="hover:text-[#c5a880] transition-colors underline"
-              >
-                PJe TJ-PI
-              </a>
-            </div>
+
+          <div className="flex items-center gap-2 text-center md:text-right">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#b89058]" />
+            <span>Exercício profissional pautado no Código de Ética e Disciplina da OAB.</span>
           </div>
         </div>
-
       </div>
     </footer>
   );
 };
-
