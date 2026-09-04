@@ -35,23 +35,23 @@ export const MobileQuickBar: React.FC<MobileQuickBarProps> = ({ navigate }) => {
           href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal de urgência!')}
           target="_blank"
           rel="noopener noreferrer"
-          className="col-span-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md btn-shimmer touch-press transition-all cursor-pointer select-none"
+          className="col-span-2 btn-whatsapp py-2.5 px-3 text-xs uppercase tracking-wider font-bold"
         >
-          <MessageSquare className="w-4 h-4 fill-black/20 shrink-0" />
-          <span className="font-extrabold text-[11px] truncate">WhatsApp 24h</span>
+          <MessageSquare className="w-4 h-4 shrink-0" />
+          <span className="font-bold text-[11px] truncate">WhatsApp 24h</span>
         </a>
 
         {/* Direct Call (Emergency #2) */}
         <a
           id="mobile-quick-call-btn"
           href={`tel:${lawyerProfile.phoneRaw}`}
-          className={`py-2.5 px-2 rounded-xl border font-bold text-[11px] uppercase tracking-wider flex flex-col items-center justify-center gap-0.5 shadow-sm touch-press transition-all cursor-pointer select-none ${
+          className={`py-2 px-2 rounded-xl border font-bold text-[11px] uppercase tracking-wider flex flex-col items-center justify-center gap-0.5 shadow-sm touch-press transition-all cursor-pointer select-none ${
             isDark 
-              ? 'bg-red-950/40 border-red-800/80 text-red-300 hover:bg-red-900/50 active:bg-red-900' 
-              : 'bg-red-50 border-red-300 text-red-700 hover:bg-red-100 active:bg-red-200'
+              ? 'bg-[#161c28] border-[#29384f] text-[#cbd5e1] hover:bg-[#1d2638]' 
+              : 'bg-[#faf8f5] border-[#dfd2be] text-[#0f2137] hover:bg-[#f3ece0]'
           }`}
         >
-          <PhoneCall className="w-3.5 h-3.5 text-red-500 shrink-0" />
+          <PhoneCall className="w-3.5 h-3.5 text-[#b89058] shrink-0" />
           <span className="leading-none text-[10px]">Ligar 24h</span>
         </a>
 
@@ -62,13 +62,13 @@ export const MobileQuickBar: React.FC<MobileQuickBarProps> = ({ navigate }) => {
             navigate('contato');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className={`py-2.5 px-2 rounded-xl border font-bold text-[11px] uppercase tracking-wider flex flex-col items-center justify-center gap-0.5 shadow-sm touch-press transition-all cursor-pointer select-none ${
+          className={`py-2 px-2 rounded-xl border font-bold text-[11px] uppercase tracking-wider flex flex-col items-center justify-center gap-0.5 shadow-sm touch-press transition-all cursor-pointer select-none ${
             isDark 
-              ? 'bg-[#151c2c] border-[#25354e] text-[#c5a880] hover:bg-[#1b253b] active:bg-[#202b42]' 
-              : 'bg-[#faf6f0] border-[#c5a880] text-[#855d21] hover:bg-[#f3ece0] active:bg-[#ede3d3]'
+              ? 'bg-[#161c28] border-[#29384f] text-[#c5a880] hover:bg-[#1d2638]' 
+              : 'bg-[#faf8f5] border-[#dfd2be] text-[#8c642b] hover:bg-[#f3ece0]'
           }`}
         >
-          <Mail className="w-3.5 h-3.5 text-[#c5a880] shrink-0" />
+          <Mail className="w-3.5 h-3.5 text-[#b89058] shrink-0" />
           <span className="leading-none text-[10px]">Dúvidas</span>
         </button>
 

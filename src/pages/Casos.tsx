@@ -259,10 +259,10 @@ export const Casos: React.FC<CasosProps> = ({ navigate }) => {
                   href={getWhatsAppUrl(`Olá, Dr. Fagner Silva. Gostaria de entender mais sobre o caso "${c.title}".`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black shadow-sm touch-press"
+                  className="p-2 rounded-xl btn-whatsapp shadow-sm"
                   title="Consultar caso no WhatsApp"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 fill-black/20" />
+                  <MessageSquare className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
@@ -320,17 +320,15 @@ export const Casos: React.FC<CasosProps> = ({ navigate }) => {
                 href={getWhatsAppUrl(`Olá, Dr. Fagner Silva. Gostaria de agendar uma consulta sobre a tese "${selectedCaseModal.title}".`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer"
+                className="btn-whatsapp w-full sm:flex-1 py-3.5 px-4 text-xs uppercase tracking-wider text-center select-none"
               >
-                <MessageSquare className="w-4 h-4 fill-black/20" />
+                <MessageSquare className="w-4 h-4" />
                 <span>Consultar Caso no WhatsApp</span>
               </a>
 
               <button
                 onClick={() => setSelectedCaseModal(null)}
-                className={`w-full sm:w-auto py-3.5 px-5 rounded-2xl border text-xs uppercase tracking-wider font-bold ${
-                  isDark ? 'border-[#2d3e5b] hover:bg-[#141d2e]' : 'border-[#ebdcc9] bg-white hover:bg-[#faf8f5]'
-                }`}
+                className="btn-secondary w-full sm:w-auto py-3.5 px-5 text-xs uppercase tracking-wider select-none"
               >
                 Fechar
               </button>

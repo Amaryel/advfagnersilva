@@ -265,9 +265,9 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
                   href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal de urgência.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+                  className="btn-whatsapp w-full py-3 px-4 text-xs uppercase tracking-wider text-center select-none"
                 >
-                  <MessageSquare className="w-4 h-4 fill-black/20" />
+                  <MessageSquare className="w-4 h-4" />
                   <span>WhatsApp de Plantão</span>
                 </a>
               </div>

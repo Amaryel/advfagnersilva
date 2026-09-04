@@ -65,37 +65,49 @@ export const Sobre: React.FC<SobreProps> = ({ navigate }) => {
           transition={{ duration: 0.6 }}
           className="lg:col-span-5 space-y-6"
         >
-          <div className={`rounded-3xl overflow-hidden border shadow-xl space-y-0 transition-colors interactive-card ${
-            isDark ? 'bg-[#0d121c] border-[#233148]' : 'bg-white border-[#ebdcc9]'
-          }`}>
-            
-            {/* Visual Image Header */}
-            <div className="relative h-72 w-full overflow-hidden">
-              <SafeImage
-                src={lawyerProfile.avatarUrl || "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"}
-                alt="Dr. Fagner Silva - Advogado Criminalista"
-                className="w-full h-full object-cover object-top img-zoom brightness-[0.9] contrast-[1.05]"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-t ${
-                isDark ? 'from-[#0d121c] via-[#0d121c]/40' : 'from-white via-white/20'
-              } to-transparent`} />
-              
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1.5 rounded-full bg-white/95 dark:bg-[#080b12]/80 backdrop-blur-md border border-[#b89058]/60 text-[#8c642b] dark:text-[#c5a880] text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 shadow-md font-bold">
-                  <Scale className="w-3.5 h-3.5" />
-                  <span>Advocacia Criminal</span>
-                </span>
-              </div>
+          <div className="relative group">
+            {/* Golden Ambient Radial Halo */}
+            <div className="lawyer-portrait-halo" />
 
-              <div className="absolute bottom-4 left-5 right-5">
-                <h2 className="font-serif text-2xl font-bold text-[#0f2137] dark:text-[#f8fafc]">
-                  Dr. Fagner Silva
-                </h2>
-                <span className="text-xs text-[#b89058] font-mono uppercase tracking-wider block mt-0.5 font-bold">
-                  Isaías Coelho / PI • Todo o Piauí
-                </span>
+            <div className={`relative rounded-3xl overflow-hidden border shadow-xl space-y-0 transition-colors interactive-card ${
+              isDark ? 'bg-[#0d121c] border-[#233148]' : 'bg-white border-[#ebdcc9]'
+            }`}>
+              
+              {/* Visual Image Header */}
+              <div className="relative h-72 sm:h-80 w-full overflow-hidden">
+                <SafeImage
+                  src={lawyerProfile.avatarUrl || "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"}
+                  alt="Dr. Fagner Silva - Advogado Criminalista"
+                  className="w-full h-full object-cover object-top img-zoom brightness-[0.92] contrast-[1.05]"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${
+                  isDark ? 'from-[#0d121c] via-[#0d121c]/40' : 'from-[#0f2137] via-[#0f2137]/30'
+                } to-transparent`} />
+                
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                  <div className="portrait-glass-badge px-3 py-1.5 rounded-full text-[#8c642b] dark:text-[#c5a880] text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 shadow-md font-bold">
+                    <Scale className="w-3.5 h-3.5" />
+                    <span>Advocacia Criminal</span>
+                  </div>
+
+                  <div className="portrait-glass-badge px-2.5 py-1.5 rounded-full text-[#8c642b] dark:text-[#c5a880] text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 shadow-md font-bold">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>OAB/PI Ativo</span>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-4 left-5 right-5 text-white">
+                  <h2 className="font-serif text-2xl font-bold text-white drop-shadow-md">
+                    Dr. Fagner Silva
+                  </h2>
+                  <span className="text-xs text-[#e5d4be] font-mono uppercase tracking-wider block mt-0.5 font-bold drop-shadow-sm">
+                    Isaías Coelho / PI • Todo o Piauí
+                  </span>
+                </div>
               </div>
-            </div>
 
             {/* Quick Facts List */}
             <div className="p-6 space-y-3 text-xs">
@@ -141,14 +153,15 @@ export const Sobre: React.FC<SobreProps> = ({ navigate }) => {
                   href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de agendar um atendimento.')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+                  className="btn-whatsapp w-full py-3.5 px-4 text-xs uppercase tracking-wider text-center select-none"
                 >
-                  <MessageSquare className="w-4 h-4 fill-black/20" />
+                  <MessageSquare className="w-4 h-4" />
                   <span>Falar no WhatsApp com o Dr. Fagner</span>
                 </a>
               </div>
             </div>
 
+          </div>
           </div>
 
           {/* Council & Civic Mandate Box */}
@@ -277,7 +290,7 @@ export const Sobre: React.FC<SobreProps> = ({ navigate }) => {
                 navigate('atuacao');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="px-5 py-3 rounded-2xl bg-[#b89058] hover:bg-[#a0773d] text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none"
+              className="btn-primary px-5 py-3 text-xs uppercase tracking-wider select-none"
             >
               <span>Ver Áreas</span>
               <ArrowRight className="w-4 h-4" />

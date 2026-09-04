@@ -192,9 +192,9 @@ export const Atuacao: React.FC<AtuacaoProps> = ({ navigate }) => {
                       href={getWhatsAppUrl(area.whatsappMessage)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+                      className="btn-whatsapp w-full py-3 px-4 text-xs uppercase tracking-wider text-center select-none"
                     >
-                      <MessageSquare className="w-4 h-4 fill-black/20" />
+                      <MessageSquare className="w-4 h-4" />
                       <span>Falar sobre esta Área</span>
                     </a>
                   </div>
@@ -228,17 +228,15 @@ export const Atuacao: React.FC<AtuacaoProps> = ({ navigate }) => {
             href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal em regime de plantão urgente.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black font-bold text-xs uppercase tracking-wider shadow-lg flex items-center gap-2 btn-shimmer touch-press cursor-pointer select-none"
+            className="btn-whatsapp py-3 px-6 text-xs uppercase tracking-wider select-none"
           >
-            <MessageSquare className="w-4 h-4 fill-black/20" />
+            <MessageSquare className="w-4 h-4" />
             <span>WhatsApp Plantão</span>
           </a>
 
           <a
             href={`tel:${lawyerProfile.phoneRaw}`}
-            className={`py-3.5 px-5 rounded-2xl border text-xs uppercase tracking-wider font-bold flex items-center gap-2 touch-press cursor-pointer select-none ${
-              isDark ? 'border-[#2d3e5b] text-[#cbd5e1] hover:bg-[#141d2e]' : 'border-[#ebdcc9] bg-white text-[#0f2137] shadow-sm'
-            }`}
+            className="btn-secondary py-3 px-5 text-xs uppercase tracking-wider select-none"
           >
             <PhoneCall className="w-3.5 h-3.5 text-[#b89058]" />
             <span>Ligar Agora</span>

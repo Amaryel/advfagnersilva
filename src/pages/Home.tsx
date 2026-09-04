@@ -166,6 +166,82 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
               Defesa Criminal Estratégica, <span className="gold-gradient-text font-extrabold">Combativa & Imediata</span>.
             </h1>
 
+            {/* Mobile-Exclusive Lawyer Portrait Card with Visual Effects (Visible on Mobile & Tablet) */}
+            <div className="block lg:hidden my-4">
+              <div className="relative group">
+                {/* Ambient Golden Radial Halo */}
+                <div className="lawyer-portrait-halo" />
+
+                <div className={`relative rounded-2xl overflow-hidden border shadow-xl interactive-card ${
+                  isDark ? 'bg-[#0c1018] border-[#223049]' : 'bg-white border-[#ebdcc9]'
+                }`}>
+                  {/* Photo Container */}
+                  <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+                    <SafeImage
+                      src={lawyerProfile.avatarUrl || "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"}
+                      alt="Dr. Fagner Silva - Advogado Criminalista"
+                      className="w-full h-full object-cover object-top img-zoom brightness-[0.92] contrast-[1.05]"
+                    />
+                    
+                    {/* Vignette Gradients */}
+                    <div className={`absolute inset-0 bg-gradient-to-t ${
+                      isDark ? 'from-[#0c1018] via-[#0c1018]/40' : 'from-[#0f2137] via-[#0f2137]/30'
+                    } to-transparent`} />
+
+                    {/* Top Badges */}
+                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                      <div className="portrait-glass-badge px-2.5 py-1 rounded-full text-[10px] font-mono font-bold flex items-center gap-1.5 text-[#8c642b] dark:text-[#c5a880]">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span>OAB/PI • Ativo</span>
+                      </div>
+
+                      <div className="portrait-glass-badge px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-[#b89058] flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-[#b89058]" />
+                        <span>Plantão 24h</span>
+                      </div>
+                    </div>
+
+                    {/* Bottom Info on Photo */}
+                    <div className="absolute bottom-3 left-4 right-4 text-white">
+                      <span className="text-[10px] font-mono tracking-widest uppercase text-[#e5d4be] font-bold block drop-shadow-sm">
+                        Advocacia Criminal • Isaías Coelho / PI
+                      </span>
+                      <h2 className="font-serif text-2xl font-bold text-white drop-shadow-md">
+                        Dr. Fagner Silva
+                      </h2>
+                    </div>
+                  </div>
+
+                  {/* Quick Card Sub-bar */}
+                  <div className={`p-3.5 flex items-center justify-between gap-2 text-xs border-t ${
+                    isDark ? 'bg-[#0f1420] border-[#1b263b]' : 'bg-[#faf8f5] border-[#ebdcc9]'
+                  }`}>
+                    <div className="flex items-center gap-2">
+                      <div className="soft-icon-pod !p-1.5 shrink-0">
+                        <Landmark className="w-3.5 h-3.5" />
+                      </div>
+                      <span className={`text-[11px] font-semibold truncate ${isDark ? 'text-[#cbd5e1]' : 'text-[#475569]'}`}>
+                        {lawyerProfile.mandate}
+                      </span>
+                    </div>
+
+                    <a
+                      href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal.')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-whatsapp py-1.5 px-3 text-[11px] font-bold tracking-wide shrink-0"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Sub-headline */}
             <p className={`text-base sm:text-lg leading-relaxed max-w-2xl font-normal ${
               isDark ? 'text-[#94a3b8]' : 'text-[#475569]'
@@ -225,10 +301,10 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de assistência criminal e gostaria de apresentar meu caso.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs tracking-wider uppercase shadow-xl shadow-emerald-600/20 btn-shimmer touch-press cursor-pointer select-none"
+                className="btn-whatsapp py-3.5 px-6 text-xs uppercase tracking-wider select-none"
               >
-                <MessageSquare className="w-4 h-4 fill-black/20" />
-                <span>Falar com o Advogado no WhatsApp</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Atendimento no WhatsApp</span>
               </a>
 
               <button
@@ -237,11 +313,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                   navigate('atuacao');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl border text-xs font-bold tracking-wider uppercase backdrop-blur-sm touch-press cursor-pointer select-none transition-all ${
-                  isDark 
-                    ? 'bg-[#111726]/90 hover:bg-[#182338] border-[#273752] hover:border-[#c5a880]/60 text-[#e2e8f0]' 
-                    : 'bg-white hover:bg-[#faf7f2] border-[#dfd2be] hover:border-[#b89058] text-[#0f2137] shadow-sm'
-                }`}
+                className="btn-secondary py-3.5 px-6 text-xs uppercase tracking-wider select-none"
               >
                 <span>Conhecer Especialidades</span>
                 <ArrowRight className="w-4 h-4 text-[#b89058]" />
@@ -249,23 +321,19 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
             </div>
           </motion.div>
 
-          {/* Lawyer Presentation Portrait Card (Right Column) */}
+          {/* Lawyer Presentation Portrait Card (Right Column on Desktop) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="lg:col-span-5"
+            className="hidden lg:block lg:col-span-5"
           >
             <div className="relative group">
-              {/* Soft Outer Golden Halo */}
-              <div className={`absolute -inset-2 rounded-3xl opacity-60 blur-xl group-hover:opacity-90 transition-opacity pointer-events-none ${
-                isDark 
-                  ? 'bg-gradient-to-tr from-[#c5a880]/20 to-[#1e293b]/40' 
-                  : 'bg-gradient-to-tr from-[#e5d4be]/60 to-[#d0bfa7]/40'
-              }`} />
+              {/* Golden Ambient Radial Halo */}
+              <div className="lawyer-portrait-halo" />
 
               <div className={`relative border rounded-3xl overflow-hidden shadow-2xl interactive-card ${
-                isDark ? 'bg-[#0c1018] border-[#223049]' : 'bg-white border-[#e8dfd2]'
+                isDark ? 'bg-[#0c1018] border-[#223049]' : 'bg-white border-[#ebdcc9]'
               }`}>
                 
                 {/* Lawyer Portrait Image */}
@@ -273,23 +341,26 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                   <SafeImage
                     src={lawyerProfile.avatarUrl || "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"}
                     alt="Dr. Fagner Silva - Advogado Criminalista"
-                    className="w-full h-full object-cover object-top img-zoom brightness-[0.9] contrast-[1.05]"
+                    className="w-full h-full object-cover object-top img-zoom brightness-[0.92] contrast-[1.05]"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t ${
-                    isDark ? 'from-[#0c1018] via-[#0c1018]/30' : 'from-white via-white/20'
+                    isDark ? 'from-[#0c1018] via-[#0c1018]/30' : 'from-[#0f2137] via-[#0f2137]/20'
                   } to-transparent`} />
                   
                   {/* Floating OAB Verification Badge */}
-                  <div className="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-white/95 dark:bg-[#080b12]/90 backdrop-blur-md border border-[#c5a880]/60 text-[#8c642b] dark:text-[#c5a880] text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 shadow-md">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <div className="absolute top-4 right-4 portrait-glass-badge px-3 py-1.5 rounded-full text-[#8c642b] dark:text-[#c5a880] text-[10px] font-mono uppercase tracking-widest flex items-center gap-1.5 shadow-md">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
                     <span className="font-bold">OAB/PI • Ativo</span>
                   </div>
 
-                  <div className="absolute bottom-3 left-5 right-5">
-                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#b89058] font-bold block">
+                  <div className="absolute bottom-3 left-5 right-5 text-white">
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-[#e5d4be] font-bold block drop-shadow-sm">
                       Isaías Coelho — Piauí
                     </span>
-                    <h2 className="font-serif text-2xl font-bold text-[#0f2137] dark:text-[#f8fafc]">
+                    <h2 className="font-serif text-2xl font-bold text-white drop-shadow-md">
                       Dr. Fagner Silva
                     </h2>
                   </div>
@@ -538,19 +609,15 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 href={getWhatsAppUrl(currentTriageData.waMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none text-center"
+                className="btn-whatsapp w-full py-3.5 px-5 text-xs uppercase tracking-wider text-center"
               >
-                <MessageSquare className="w-4 h-4 fill-black/20" />
+                <MessageSquare className="w-4 h-4" />
                 <span>Acionar Plantão para este Caso</span>
               </a>
 
               <a
                 href={`tel:${lawyerProfile.phoneRaw}`}
-                className={`w-full py-3 px-4 rounded-2xl border text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 touch-press cursor-pointer select-none ${
-                  isDark 
-                    ? 'border-[#293b58] text-[#cbd5e1] hover:bg-[#131b2a]' 
-                    : 'border-[#e8dfd2] text-[#0f2137] hover:bg-white bg-white shadow-sm'
-                }`}
+                className="btn-secondary w-full py-3 px-4 text-xs uppercase tracking-wider"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-[#b89058]" />
                 <span>Ligar Agora ({lawyerProfile.phoneFormatted})</span>
@@ -735,20 +802,16 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de orientação jurídica criminal.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-4 px-8 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+              className="btn-whatsapp py-3.5 px-6 text-xs uppercase tracking-wider select-none"
             >
-              <MessageSquare className="w-4 h-4 fill-black/20" />
+              <MessageSquare className="w-4 h-4" />
               <span>Chamar no WhatsApp de Plantão</span>
             </a>
 
             <a
               id="cta-bottom-call-btn"
               href={`tel:${lawyerProfile.phoneRaw}`}
-              className={`py-4 px-7 rounded-2xl border text-xs uppercase tracking-wider font-bold flex items-center gap-2 touch-press cursor-pointer select-none ${
-                isDark 
-                  ? 'border-[#2e4060] bg-[#121927] text-[#cbd5e1] hover:bg-[#1a2438]' 
-                  : 'border-[#e8dfd2] bg-white text-[#0f2137] hover:bg-[#faf8f5] shadow-sm'
-              }`}
+              className="btn-secondary py-3.5 px-6 text-xs uppercase tracking-wider select-none"
             >
               <PhoneCall className="w-4 h-4 text-[#b89058]" />
               <span>Ligar: {lawyerProfile.phoneFormatted}</span>

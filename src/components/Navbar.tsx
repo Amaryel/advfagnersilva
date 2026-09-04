@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AppRoute } from '../types';
 import { lawyerProfile, getWhatsAppUrl } from '../data/lawyerData';
 import { useTheme } from '../context/ThemeContext';
+import { SafeImage } from './SafeImage';
 import { 
   Scale, 
   Menu, 
@@ -224,9 +225,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal com o escritório.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs tracking-wider uppercase transition-all shadow-md btn-shimmer touch-press cursor-pointer select-none"
+              className="btn-whatsapp px-3.5 py-2 text-xs font-bold tracking-wide select-none"
             >
-              <MessageSquare className="w-4 h-4 fill-black/20" />
+              <MessageSquare className="w-4 h-4" />
               <span>WhatsApp Plantão</span>
             </a>
 
@@ -234,7 +235,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`xl:hidden p-2 rounded-2xl border focus:outline-none transition-all touch-press ${
+              className={`xl:hidden p-2 rounded-xl border focus:outline-none transition-all touch-press ${
                 isDark 
                   ? 'border-[#223049] text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#161f30]' 
                   : 'border-[#ebdcc9] text-[#475569] hover:text-[#0f2137] bg-white shadow-sm'
@@ -250,11 +251,43 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
         {mobileMenuOpen && (
           <div 
             id="mobile-nav-drawer" 
-            className={`xl:hidden border-t px-4 pt-4 pb-6 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200 ${
+            className={`xl:hidden border-t px-4 pt-3 pb-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-150 ${
               isDark ? 'border-[#1e293b] bg-[#0b0e14]' : 'border-[#ebdcc9] bg-white'
             }`}
           >
-            <div className="flex flex-col gap-1.5">
+            {/* Lawyer Mini Profile Badge */}
+            <div 
+              onClick={() => handleNavClick('sobrenos')}
+              className={`mb-3 p-3 rounded-2xl border flex items-center gap-3 cursor-pointer select-none interactive-card ${
+                isDark ? 'bg-[#101726] border-[#22334e]' : 'bg-[#faf6f0] border-[#ebdcc9]'
+              }`}
+            >
+              <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-[#b89058]/50 shadow-md">
+                <SafeImage
+                  src={lawyerProfile.avatarUrl || "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80"}
+                  alt="Dr. Fagner Silva"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-serif font-bold text-sm text-[#0f2137] dark:text-[#f8fafc] truncate">
+                    Dr. Fagner Silva
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                </div>
+                <p className="text-[11px] text-[#b89058] font-mono uppercase tracking-wider font-semibold truncate">
+                  Advocacia Criminal • Isaías Coelho
+                </p>
+                <span className={`text-[10px] block truncate ${isDark ? 'text-[#94a3b8]' : 'text-[#64748b]'}`}>
+                  {lawyerProfile.mandate}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-1">
               {navItems.map((item) => {
                 const isActive = currentRoute === item.route;
                 return (
@@ -262,35 +295,35 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                     key={item.route}
                     id={`mobile-nav-link-${item.route}`}
                     onClick={() => handleNavClick(item.route)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-2xl text-xs uppercase tracking-wider font-bold text-left transition-all touch-press cursor-pointer select-none ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs uppercase tracking-wider font-bold text-left transition-all touch-press cursor-pointer select-none ${
                       isActive
                         ? isDark 
-                          ? 'bg-[#182133] text-[#c5a880] border-l-4 border-[#c5a880]' 
-                          : 'bg-[#faf5ed] text-[#8c642b] border-l-4 border-[#b89058]'
+                          ? 'bg-[#182133] text-[#c5a880] border-l-2 border-[#c5a880]' 
+                          : 'bg-[#faf5ed] text-[#8c642b] border-l-2 border-[#b89058]'
                         : isDark 
                           ? 'text-[#94a3b8] hover:bg-[#131b2a] hover:text-[#f8fafc]' 
                           : 'text-[#475569] hover:bg-[#faf7f2] hover:text-[#0f2137]'
                     }`}
                   >
                     <span>{item.label}</span>
-                    <span className="text-[11px] font-mono text-[#64748b] lowercase">{item.path}</span>
+                    <span className="text-[10px] font-mono text-[#64748b] lowercase">{item.path}</span>
                   </button>
                 );
               })}
             </div>
 
-            <div className={`mt-5 pt-4 border-t flex flex-col gap-3 ${isDark ? 'border-[#1e293b]' : 'border-[#ebdcc9]'}`}>
+            <div className={`mt-4 pt-4 border-t flex flex-col gap-2.5 ${isDark ? 'border-[#1e293b]' : 'border-[#ebdcc9]'}`}>
               {/* Instagram & PJe buttons */}
               <div className="grid grid-cols-2 gap-2">
                 <a
                   href={lawyerProfile.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl border text-xs font-bold touch-press ${
+                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
                     isDark ? 'border-[#223049] text-[#e1306c] bg-[#121824]' : 'border-[#ebdcc9] text-[#e1306c] bg-[#faf7f2]'
                   }`}
                 >
-                  <Instagram className="w-4 h-4" />
+                  <Instagram className="w-3.5 h-3.5" />
                   <span>Instagram</span>
                 </a>
 
@@ -298,11 +331,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   href={lawyerProfile.pje1gUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-2xl border text-xs font-bold touch-press ${
+                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
                     isDark ? 'border-[#223049] text-[#c5a880] bg-[#121824]' : 'border-[#ebdcc9] text-[#8c642b] bg-[#faf7f2]'
                   }`}
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="w-3.5 h-3.5" />
                   <span>PJe TJ-PI</span>
                 </a>
               </div>
@@ -312,22 +345,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                 href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal em regime de urgência.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black text-xs uppercase tracking-wider font-bold shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                className="btn-whatsapp w-full py-3 px-4 text-xs tracking-wider uppercase font-bold"
               >
-                <MessageSquare className="w-4 h-4 fill-black/20" />
+                <MessageSquare className="w-4 h-4" />
                 <span>Atendimento no WhatsApp</span>
               </a>
 
               <a
                 id="mobile-direct-call"
                 href={`tel:${lawyerProfile.phoneRaw}`}
-                className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border text-xs uppercase tracking-wider font-bold transition-colors touch-press cursor-pointer select-none ${
-                  isDark 
-                    ? 'border-[#2d3a52] text-[#cbd5e1] hover:bg-[#131b2a]' 
-                    : 'border-[#ebdcc9] text-[#0f2137] bg-white hover:bg-[#faf7f2]'
-                }`}
+                className={`btn-secondary w-full py-2.5 px-4 text-xs uppercase tracking-wider font-bold`}
               >
-                <PhoneCall className="w-4 h-4 text-[#b89058]" />
+                <PhoneCall className="w-3.5 h-3.5 text-[#b89058]" />
                 <span>Ligar: {lawyerProfile.phoneFormatted}</span>
               </a>
             </div>

@@ -181,9 +181,9 @@ export const Faq: React.FC<FaqProps> = ({ navigate }) => {
                       href={getWhatsAppUrl(faq.whatsappFollowUp)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black font-bold text-xs uppercase tracking-wider shadow-sm btn-shimmer touch-press"
+                      className="btn-whatsapp px-3.5 py-2 text-xs uppercase tracking-wider select-none"
                     >
-                      <MessageSquare className="w-3.5 h-3.5 fill-black/20" />
+                      <MessageSquare className="w-3.5 h-3.5" />
                       <span>Consultar no WhatsApp</span>
                     </a>
                   </div>

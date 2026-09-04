@@ -123,19 +123,11 @@ export const WhatsAppFloating: React.FC = () => {
       <button
         id="floating-whatsapp-main-btn"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-[#25D366] to-[#1eb655] hover:from-[#22c35e] hover:to-[#179e49] text-white shadow-xl shadow-emerald-950/50 hover:shadow-emerald-900/60 active:scale-95 transition-all group"
+        className="btn-whatsapp px-4 py-3 rounded-full text-xs font-bold tracking-wide uppercase shadow-lg select-none"
         aria-label="Abrir atendimento no WhatsApp"
       >
-        <div className="relative">
-          <MessageCircle className="w-5 h-5 fill-white stroke-[1.5]" />
-          <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
-          </span>
-        </div>
-        <span className="text-xs font-bold tracking-wide uppercase font-sans pr-1">
-          WhatsApp Plantão 24h
-        </span>
+        <MessageCircle className="w-5 h-5" />
+        <span>WhatsApp 24h</span>
       </button>
     </div>
   );

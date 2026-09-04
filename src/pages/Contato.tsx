@@ -150,9 +150,9 @@ export const Contato: React.FC = () => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal com o escritório.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer touch-press cursor-pointer select-none text-center"
+              className="btn-whatsapp w-full py-3.5 px-4 text-xs uppercase tracking-wider text-center select-none"
             >
-              <MessageSquare className="w-4 h-4 fill-black/20" />
+              <MessageSquare className="w-4 h-4" />
               <span>Chamar no WhatsApp de Plantão</span>
             </a>
           </div>
@@ -331,10 +331,10 @@ export const Contato: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                  className="btn-whatsapp w-full py-3.5 px-6 text-xs uppercase tracking-wider select-none"
                 >
-                  <MessageSquare className="w-4 h-4 fill-black/20" />
-                  <span>Enviar Mensagem Formatada no WhatsApp</span>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Enviar Mensagem no WhatsApp</span>
                 </button>
               </form>
             )}
@@ -451,7 +451,7 @@ export const Contato: React.FC = () => {
                 <button
                   type="submit"
                   disabled={sendStatus === 'loading'}
-                  className="w-full py-4 px-6 rounded-2xl bg-[#b89058] hover:bg-[#a0773d] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
+                  className="btn-primary w-full py-3.5 px-6 text-xs uppercase tracking-wider select-none disabled:opacity-60"
                 >
                   {sendStatus === 'loading' ? (
                     <>

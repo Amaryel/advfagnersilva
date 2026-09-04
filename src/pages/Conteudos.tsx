@@ -223,17 +223,15 @@ export const Conteudos: React.FC<ConteudosProps> = ({ navigate }) => {
                 href={getWhatsAppUrl(`Olá, Dr. Fagner Silva. Li o artigo "${selectedArticle.title}" e gostaria de tirar uma dúvida.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#25D366] to-[#128C7E] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md btn-shimmer"
+                className="btn-whatsapp w-full sm:flex-1 py-3.5 px-4 text-xs uppercase tracking-wider text-center select-none"
               >
-                <MessageSquare className="w-4 h-4 fill-black/20" />
+                <MessageSquare className="w-4 h-4" />
                 <span>Tirar Dúvida no WhatsApp</span>
               </a>
 
               <button
                 onClick={() => setSelectedArticle(null)}
-                className={`w-full sm:w-auto py-3.5 px-5 rounded-2xl border text-xs uppercase tracking-wider font-bold ${
-                  isDark ? 'border-[#2d3e5b] hover:bg-[#141d2e]' : 'border-[#ebdcc9] bg-white hover:bg-[#faf8f5]'
-                }`}
+                className="btn-secondary w-full sm:w-auto py-3.5 px-5 text-xs uppercase tracking-wider select-none"
               >
                 Fechar
               </button>
