@@ -1,28 +1,33 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { AppRoute } from '../types';
-import { practiceAreas, lawyerProfile, getWhatsAppUrl, casePrecedents } from '../data/lawyerData';
+import { motion, AnimatePresence } from 'motion/react';
+import { AppRoute, PracticeArea, CasePrecedent } from '../types';
+import { 
+  lawyerProfile, 
+  practiceAreas, 
+  casePrecedents, 
+  getWhatsAppUrl 
+} from '../data/lawyerData';
 import { useTheme } from '../context/ThemeContext';
 import { SafeImage } from '../components/SafeImage';
 import { 
-  ShieldAlert, 
   Scale, 
-  Clock, 
-  ArrowRight, 
-  CheckCircle2, 
+  ShieldAlert, 
   PhoneCall, 
+  Clock, 
+  CheckCircle2, 
+  ArrowRight, 
   Building2, 
-  Landmark,
+  FileText, 
+  Landmark, 
+  AlertTriangle, 
+  Instagram, 
+  Globe, 
   ExternalLink,
   ChevronRight,
   Gavel,
-  FileCheck,
-  Lock,
-  Compass,
-  Sparkles,
-  Instagram,
-  Globe,
   BookOpen,
+  Compass,
+  Lock,
   MessageSquare
 } from 'lucide-react';
 
@@ -34,49 +39,50 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
+  const [activeTriage, setActiveTriage] = useState<'flagrante' | 'intimacao' | 'custodia' | 'juri' | 'execucao'>('flagrante');
+
   const featuredAreas = practiceAreas.slice(0, 4);
   const featuredCases = casePrecedents.slice(0, 3);
-  const [activeTriage, setActiveTriage] = useState<'flagrante' | 'intimacao' | 'custodia' | 'juri' | 'execucao'>('flagrante');
 
   const triageOptions = [
     {
       id: 'flagrante',
       title: 'Prisão em Flagrante',
-      subtitle: 'Detenção recente (últimas 24h)',
-      icon: ShieldAlert,
-      urgency: 'Urgência Máxima 24h',
-      guidance: 'Não assine documentos sem a presença do advogado. O investigado tem o direito constitucional de permanecer em silêncio. Acione imediatamente o plantão para acompanhamento da lavratura do auto na delegacia.',
-      steps: ['Não declarar nada sem advogado', 'Localizar em qual delegacia está', 'Acionar plantão de custódia 24h'],
-      waMessage: 'Olá, Dr. Fagner Silva. Preciso de atendimento urgente no plantão para um caso de PRISÃO EM FLAGRANTE em Isaías Coelho/região.'
+      subtitle: 'Atuação imediata na Delegacia',
+      icon: AlertTriangle,
+      urgency: 'Urgência Máxima • 24 Horas',
+      guidance: 'Nas primeiras horas após a prisão, nossa prioridade absoluta é resguardar o direito ao silêncio, verificar a legalidade da abordagem policial e preparar a fundamentação para a liberdade provisória ou relaxamento do flagrante.',
+      steps: ['Contato direto com a autoridade policial', 'Garantia de integridade física e direitos', 'Pedido de relaxamento ou liberdade sem fiança'],
+      waMessage: 'Olá, Dr. Fagner Silva. Preciso de atendimento URGENTE para uma PRISÃO EM FLAGRANTE em andamento.'
     },
     {
       id: 'intimacao',
       title: 'Intimação Policial',
-      subtitle: 'Notificação para prestar depoimento',
-      icon: FileCheck,
-      urgency: 'Atendimento Pré-Oitiva',
-      guidance: 'Nunca compareça a uma oitiva policial desacompanhado. O advogado criminalista examinará previamente o teor do inquérito e instruirá seu depoimento de modo seguro e resguardado pela lei.',
-      steps: ['Obter cópia da intimação', 'Analisar os autos antes do depoimento', 'Garantir o direito ao silêncio se necessário'],
-      waMessage: 'Olá, Dr. Fagner Silva. Recebi uma INTIMAÇÃO POLICIAL para comparecer à delegacia e gostaria de orientação prévia.'
+      subtitle: 'Como agir ao ser chamado a depor',
+      icon: FileText,
+      urgency: 'Atuação Preventiva',
+      guidance: 'Comparecer a uma delegacia sem assistência técnica prévia pode gerar prejuízos irreparáveis. O advogado examina os autos do inquérito de antemão e orienta detalhadamente o depoimento para evitar autoincriminação indevida.',
+      steps: ['Habilitação e cópia integral do inquérito', 'Análise das provas e declarações prévias', 'Acompanhamento presencial no interrogatório'],
+      waMessage: 'Olá, Dr. Fagner Silva. Recebi uma INTIMAÇÃO POLICIAL para depor e gostaria de acompanhamento preventivo.'
     },
     {
       id: 'custodia',
       title: 'Audiência de Custódia',
-      subtitle: 'Apresentação em até 24h perante o Juiz',
+      subtitle: 'Defesa da liberdade perante o Juiz',
       icon: Gavel,
-      urgency: 'Prazo Legal de 24 Horas',
-      guidance: 'Fase crucial para requerer a concessão de liberdade provisória, relaxamento de prisão ilegal e averiguação de integridade física. Presença indispensável de advogado criminalista.',
-      steps: ['Comprovar residência fixa e trabalho', 'Apresentar antecedentes e atenuantes', 'Pleitear liberdade sem fiança ou medidas cautelares'],
-      waMessage: 'Olá, Dr. Fagner Silva. Preciso de defesa técnica imediata para uma AUDIÊNCIA DE CUSTÓDIA no Piauí.'
+      urgency: 'Prazo Legal de 24h',
+      guidance: 'A audiência de custódia é o momento decisivo para demonstrar a desnecessidade da prisão preventiva, comprovando residência fixa, trabalho lícito e propondo medidas cautelares alternativas ao cárcere.',
+      steps: ['Entrevista prévia e reservada com o custodiado', 'Comprovação de requisitos subjetivos favoráveis', 'Sustentação oral pela concessão de liberdade'],
+      waMessage: 'Olá, Dr. Fagner Silva. Preciso de assistência para uma AUDIÊNCIA DE CUSTÓDIA marcada no TJ-PI.'
     },
     {
       id: 'juri',
       title: 'Tribunal do Júri',
       subtitle: 'Crimes dolosos contra a vida',
       icon: Scale,
-      urgency: 'Estratégia Especializada',
-      guidance: 'Julgamentos perante o Conselho de Sentença exigem estudo minucioso dos laudos periciais, reconstituições e oratória firme perante os jurados para absolvição ou desclassificação do delito.',
-      steps: ['Estudo detalhado da perícia balística/necroscópica', 'Inquirição cirúrgica de testemunhas', 'Sustentação oral de teses no plenário'],
+      urgency: 'Alta Complexidade Técnica',
+      guidance: 'Atuação artesanal e minuciosa desde a 1ª fase (pronúncia) até os debates orais em plenário diante dos jurados populares, sustentando legítima defesa, desclassificação ou clemência.',
+      steps: ['Reconstituição e perícia técnica detalhada', 'Preparação de testemunhas e quesitos', 'Defesa combativa e sustentação em plenário'],
       waMessage: 'Olá, Dr. Fagner Silva. Gostaria de conversar sobre a defesa de um processo em fase de TRIBUNAL DO JÚRI no TJ-PI.'
     },
     {
@@ -137,10 +143,10 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
 
             {/* Quick Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-              <div className={`p-3.5 rounded-xl border flex items-center gap-3 transition-colors ${
+              <div className={`p-3.5 rounded-xl border flex items-center gap-3 interactive-card ${
                 isDark 
                   ? 'bg-[#0d121c]/90 border-[#1f2b3e] hover:border-[#c5a880]/50' 
-                  : 'bg-white border-[#e2e8f0] shadow-sm hover:border-[#c5a880]'
+                  : 'bg-white border-[#cbd5e1] shadow-sm hover:border-[#c5a880]'
               }`}>
                 <div className="p-2 rounded-lg bg-amber-500/15 border border-amber-500/30 text-amber-500 shrink-0">
                   <Clock className="w-4 h-4" />
@@ -151,10 +157,10 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 </div>
               </div>
 
-              <div className={`p-3.5 rounded-xl border flex items-center gap-3 transition-colors ${
+              <div className={`p-3.5 rounded-xl border flex items-center gap-3 interactive-card ${
                 isDark 
                   ? 'bg-[#0d121c]/90 border-[#1f2b3e] hover:border-[#c5a880]/50' 
-                  : 'bg-white border-[#e2e8f0] shadow-sm hover:border-[#c5a880]'
+                  : 'bg-white border-[#cbd5e1] shadow-sm hover:border-[#c5a880]'
               }`}>
                 <div className="p-2 rounded-lg bg-[#c5a880]/15 border border-[#c5a880]/30 text-[#c5a880] shrink-0">
                   <Building2 className="w-4 h-4" />
@@ -165,10 +171,10 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 </div>
               </div>
 
-              <div className={`p-3.5 rounded-xl border flex items-center gap-3 transition-colors ${
+              <div className={`p-3.5 rounded-xl border flex items-center gap-3 interactive-card ${
                 isDark 
                   ? 'bg-[#0d121c]/90 border-[#1f2b3e] hover:border-[#c5a880]/50' 
-                  : 'bg-white border-[#e2e8f0] shadow-sm hover:border-[#c5a880]'
+                  : 'bg-white border-[#cbd5e1] shadow-sm hover:border-[#c5a880]'
               }`}>
                 <div className="p-2 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 shrink-0">
                   <Landmark className="w-4 h-4" />
@@ -187,7 +193,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal e gostaria de apresentar meu caso.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-gradient-to-r from-[#c5a880] to-[#dfc399] hover:from-[#dfc399] hover:to-[#c5a880] text-[#070a10] font-bold text-xs tracking-wider uppercase shadow-xl shadow-[#c5a880]/20 transition-all active:scale-[0.98] border border-[#f3e7d3]/30"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-gradient-to-r from-[#c5a880] to-[#dfc399] hover:from-[#dfc399] hover:to-[#c5a880] text-[#070a10] font-bold text-xs tracking-wider uppercase shadow-xl shadow-[#c5a880]/20 btn-shimmer touch-press border border-[#f3e7d3]/30 cursor-pointer select-none"
               >
                 <ShieldAlert className="w-4 h-4 text-[#070a10]" />
                 <span>Atendimento no WhatsApp</span>
@@ -199,7 +205,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                   navigate('atuacao');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl border text-xs font-semibold tracking-wider uppercase transition-all backdrop-blur-sm ${
+                className={`inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl border text-xs font-semibold tracking-wider uppercase backdrop-blur-sm touch-press cursor-pointer select-none ${
                   isDark 
                     ? 'bg-[#111726]/90 hover:bg-[#182338] border-[#273752] hover:border-[#c5a880]/60 text-[#e2e8f0]' 
                     : 'bg-white hover:bg-[#f8fafc] border-[#cbd5e1] hover:border-[#c5a880] text-[#0f172a] shadow-sm'
@@ -222,7 +228,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
               {/* Outer Glow */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-tr from-[#c5a880]/30 via-transparent to-[#2b3c5a]/40 opacity-80 blur-md group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-              <div className={`relative border rounded-2xl overflow-hidden shadow-2xl space-y-0 transition-colors ${
+              <div className={`relative border rounded-2xl overflow-hidden shadow-2xl space-y-0 interactive-card ${
                 isDark ? 'bg-[#0c1018] border-[#223049]' : 'bg-white border-[#cbd5e1]'
               }`}>
                 
@@ -294,7 +300,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                         navigate('sobrenos');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className={`w-full py-2.5 px-3 rounded-xl border text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all ${
+                      className={`w-full py-2.5 px-3 rounded-xl border text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 touch-press cursor-pointer select-none ${
                         isDark 
                           ? 'bg-[#162032] hover:bg-[#1e2d46] border-[#2b3c5a] text-[#c5a880]' 
                           : 'bg-[#faf7f2] hover:bg-[#f5eee3] border-[#c5a880]/50 text-[#855d21]'
@@ -309,7 +315,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                       href={lawyerProfile.instagramUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-full py-2.5 px-3 rounded-xl border text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all ${
+                      className={`w-full py-2.5 px-3 rounded-xl border text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 touch-press cursor-pointer select-none ${
                         isDark 
                           ? 'bg-[#162032] hover:bg-[#1e2d46] border-[#2b3c5a] text-[#e1306c]' 
                           : 'bg-white hover:bg-[#f8fafc] border-[#cbd5e1] text-[#e1306c]'
@@ -368,10 +374,10 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 <button
                   key={opt.id}
                   onClick={() => setActiveTriage(opt.id as any)}
-                  className={`p-3.5 rounded-xl text-left transition-all border flex flex-col justify-between gap-3 ${
+                  className={`p-3.5 rounded-xl text-left border flex flex-col justify-between gap-3 interactive-card touch-press cursor-pointer select-none ${
                     isActive
                       ? isDark
-                        ? 'bg-[#182338] border-[#c5a880] shadow-lg shadow-[#c5a880]/10 text-[#f8fafc]'
+                        ? 'bg-[#182338] border-[#c5a880] shadow-lg shadow-[#c5a880]/15 text-[#f8fafc]'
                         : 'bg-[#faf6f0] border-[#c5a880] shadow-md text-[#0f172a]'
                       : isDark
                         ? 'bg-[#0b0f17] border-[#1a2538] hover:border-[#2b3d5b] text-[#94a3b8] hover:text-[#cbd5e1]'
@@ -397,7 +403,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
 
           {/* Active Triage Guidance Display */}
           <div className={`border rounded-xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center ${
-            isDark ? 'bg-[#090d16] border-[#1d2b40]' : 'bg-[#fafafa] border-[#e2e8f0]'
+            isDark ? 'bg-[#090d16] border-[#1d2b40]' : 'bg-[#fafafa] border-[#cbd5e1]'
           }`}>
             <div className="lg:col-span-8 space-y-4">
               <div className="flex items-center gap-2">
@@ -425,7 +431,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                   {currentTriageData.steps.map((step, idx) => (
                     <div 
                       key={idx} 
-                      className={`p-2.5 rounded-lg border flex items-start gap-2 ${
+                      className={`p-2.5 rounded-lg border flex items-start gap-2 interactive-card ${
                         isDark ? 'bg-[#101624] border-[#1b273b] text-[#cbd5e1]' : 'bg-white border-[#cbd5e1] text-[#334155]'
                       }`}
                     >
@@ -444,7 +450,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 href={getWhatsAppUrl(currentTriageData.waMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 text-center"
+                className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:from-[#20bd5a] hover:to-[#0f776a] text-black font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none text-center"
               >
                 <MessageSquare className="w-4 h-4 fill-black/20" />
                 <span>Acionar Plantão para este Caso</span>
@@ -452,7 +458,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
 
               <a
                 href={`tel:${lawyerProfile.phoneRaw}`}
-                className={`w-full py-3 px-4 rounded-xl border text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition-colors ${
+                className={`w-full py-3 px-4 rounded-xl border text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 touch-press cursor-pointer select-none ${
                   isDark 
                     ? 'border-[#293b58] text-[#cbd5e1] hover:bg-[#131b2a]' 
                     : 'border-[#cbd5e1] text-[#334155] hover:bg-white bg-[#f1f5f9]'
@@ -487,7 +493,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 navigate('atuacao');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-wider text-[#c5a880] hover:underline"
+              className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-wider text-[#c5a880] hover:underline touch-press cursor-pointer select-none"
             >
               <span>Ver todas as especialidades</span>
               <ArrowRight className="w-4 h-4" />
@@ -498,7 +504,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
             {featuredAreas.map((area) => (
               <div
                 key={area.id}
-                className={`rounded-2xl border overflow-hidden flex flex-col justify-between transition-all duration-300 group ${
+                className={`rounded-2xl border overflow-hidden flex flex-col justify-between interactive-card group ${
                   isDark 
                     ? 'bg-[#0c1018] border-[#1e2a3f] hover:border-[#c5a880]/80 shadow-xl' 
                     : 'bg-white border-[#cbd5e1] hover:border-[#c5a880] shadow-md hover:shadow-lg'
@@ -540,7 +546,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                       href={getWhatsAppUrl(`Olá, Dr. Fagner Silva. Gostaria de atendimento sobre ${area.title}.`)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c5a880] hover:text-[#dfc399] transition-colors uppercase tracking-wider"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c5a880] hover:text-[#dfc399] transition-colors uppercase tracking-wider touch-press"
                     >
                       <span>Consultar área</span>
                       <ChevronRight className="w-3.5 h-3.5" />
@@ -575,7 +581,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                 navigate('casos');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-wider text-[#c5a880] hover:underline"
+              className="inline-flex items-center gap-2 text-xs uppercase font-bold tracking-wider text-[#c5a880] hover:underline touch-press cursor-pointer select-none"
             >
               <span>Ver todos os casos e PJe TJ-PI</span>
               <ArrowRight className="w-4 h-4" />
@@ -586,7 +592,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
             {featuredCases.map((c) => (
               <div 
                 key={c.id} 
-                className={`p-5 rounded-xl border flex flex-col justify-between gap-3 ${
+                className={`p-5 rounded-xl border flex flex-col justify-between gap-3 interactive-card ${
                   isDark ? 'bg-[#121824] border-[#1f2d43]' : 'bg-white border-[#cbd5e1] shadow-sm'
                 }`}
               >
@@ -609,7 +615,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
                       navigate('casos');
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="text-[#c5a880] font-bold text-xs hover:underline flex items-center gap-1"
+                    className="text-[#c5a880] font-bold text-xs hover:underline flex items-center gap-1 touch-press cursor-pointer select-none"
                   >
                     <span>Ver tese</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -643,7 +649,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de orientação jurídica criminal.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition-transform"
+              className="py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg btn-shimmer touch-press cursor-pointer select-none"
             >
               <MessageSquare className="w-4 h-4 fill-black/20" />
               <span>Chamar no WhatsApp de Plantão</span>
@@ -652,7 +658,7 @@ export const Home: React.FC<HomeProps> = ({ navigate }) => {
             <a
               id="cta-bottom-call-btn"
               href={`tel:${lawyerProfile.phoneRaw}`}
-              className={`py-3.5 px-6 rounded-xl border text-xs uppercase tracking-wider font-semibold flex items-center gap-2 transition-colors ${
+              className={`py-3.5 px-6 rounded-xl border text-xs uppercase tracking-wider font-semibold flex items-center gap-2 touch-press cursor-pointer select-none ${
                 isDark 
                   ? 'border-[#2e4060] bg-[#121927] text-[#cbd5e1] hover:bg-[#1a2438]' 
                   : 'border-[#cbd5e1] bg-white text-[#0f172a] hover:bg-[#f8fafc]'

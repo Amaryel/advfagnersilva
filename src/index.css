@@ -3,6 +3,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
   
   body {
@@ -64,16 +65,91 @@
 }
 
 .gold-glow-hover:hover {
-  box-shadow: 0 0 30px -4px rgba(197, 168, 128, 0.22);
+  box-shadow: 0 0 30px -4px rgba(197, 168, 128, 0.25);
 }
 
 /* Image Subtle Zoom on Card Hover */
 .group:hover .img-zoom {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .img-zoom {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Luxury Interactive Card Lift & Touch Physics */
+.interactive-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease,
+              background-color 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.35), 0 0 20px -4px rgba(197, 168, 128, 0.2);
+  }
+}
+
+.interactive-card:active {
+  transform: scale(0.985);
+  transition-duration: 0.1s;
+}
+
+/* Shimmer Light Reflection Sweep on Buttons */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  transform: rotate(25deg) translate(-100%, -100%);
+  transition: transform 0.75s ease-out;
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after,
+.btn-shimmer:active::after {
+  transform: rotate(25deg) translate(100%, 100%);
+}
+
+/* Touch Active Feedback for Mobile */
+.touch-press {
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.touch-press:active {
+  transform: scale(0.96);
+  filter: brightness(1.1);
+}
+
+/* Subtle Pulsing Aura for Urgent Badges */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.4);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(197, 168, 128, 0.75);
+  }
+}
+
+.pulse-aura {
+  animation: pulseGlow 3s infinite ease-in-out;
 }
 
 /* Custom delicate scrollbar */
@@ -102,5 +178,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #c5a880;
 }
-
-

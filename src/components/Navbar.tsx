@@ -11,8 +11,7 @@ import {
   Sun, 
   Moon, 
   Instagram, 
-  Globe, 
-  BookOpen
+  Globe
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -84,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium"
+              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium touch-press"
               title="Instagram @advfagnersilva"
             >
               <Instagram className="w-3.5 h-3.5 text-[#e1306c]" />
@@ -99,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.pje1gUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium"
+              className="flex items-center gap-1 hover:text-[#c5a880] transition-colors font-medium touch-press"
               title="Acessar PJe TJ-PI"
             >
               <Globe className="w-3.5 h-3.5 text-[#c5a880]" />
@@ -111,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
             <a 
               id="topbar-phone-link"
               href={`tel:${lawyerProfile.phoneRaw}`} 
-              className={`hover:text-[#c5a880] transition-colors flex items-center gap-1.5 font-semibold ${
+              className={`hover:text-[#c5a880] transition-colors flex items-center gap-1.5 font-semibold touch-press ${
                 isDark ? 'text-[#e2e8f0]' : 'text-[#0f172a]'
               }`}
             >
@@ -140,9 +139,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
           <button 
             id="brand-logo-btn"
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-left group focus:outline-none"
+            className="flex items-center gap-3 text-left group focus:outline-none touch-press cursor-pointer select-none"
           >
-            <div className={`w-10 h-10 rounded-md border flex items-center justify-center text-[#c5a880] shadow-sm transition-colors ${
+            <div className={`w-10 h-10 rounded-xl border flex items-center justify-center text-[#c5a880] shadow-sm transition-all duration-300 group-hover:scale-105 ${
               isDark 
                 ? 'bg-[#151c2a] border-[#c5a880]/40 group-hover:border-[#c5a880]' 
                 : 'bg-[#faf7f2] border-[#c5a880] group-hover:bg-[#f5eee3]'
@@ -171,12 +170,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   key={item.route}
                   id={`nav-link-${item.route}`}
                   onClick={() => handleNavClick(item.route)}
-                  className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all relative ${
+                  className={`px-3 py-2 text-xs uppercase tracking-wider font-semibold transition-all relative touch-press cursor-pointer select-none ${
                     isActive
                       ? 'text-[#c5a880]'
                       : isDark
-                        ? 'text-[#94a3b8] hover:text-[#f8fafc]'
-                        : 'text-[#475569] hover:text-[#0f172a]'
+                        ? 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#141b28]/60 rounded-lg'
+                        : 'text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9] rounded-lg'
                   }`}
                 >
                   {item.label}
@@ -195,7 +194,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               id="theme-toggle-btn"
               onClick={toggleTheme}
               aria-label={isDark ? 'Ativar tema claro' : 'Ativar tema escuro'}
-              className={`p-2 rounded-lg border transition-colors flex items-center gap-1.5 text-xs font-medium ${
+              className={`p-2 rounded-xl border transition-all flex items-center gap-1.5 text-xs font-medium touch-press cursor-pointer select-none ${
                 isDark 
                   ? 'bg-[#141c2b] border-[#223049] text-amber-300 hover:bg-[#1c273c]' 
                   : 'bg-[#f1f5f9] border-[#cbd5e1] text-slate-700 hover:bg-[#e2e8f0]'
@@ -214,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={lawyerProfile.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`hidden sm:flex p-2 rounded-lg border transition-colors items-center justify-center ${
+              className={`hidden sm:flex p-2 rounded-xl border transition-all items-center justify-center touch-press ${
                 isDark
                   ? 'bg-[#141c2b] border-[#223049] text-[#e1306c] hover:bg-[#1c273c]'
                   : 'bg-[#f1f5f9] border-[#cbd5e1] text-[#e1306c] hover:bg-[#e2e8f0]'
@@ -230,7 +229,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Gostaria de solicitar atendimento criminal com o escritório.')}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#c5a880] hover:bg-[#d4b992] text-[#0b0e14] font-bold text-xs tracking-wider uppercase transition-all shadow-md shadow-[#c5a880]/10 hover:shadow-[#c5a880]/20 active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#c5a880] hover:bg-[#d4b992] text-[#0b0e14] font-bold text-xs tracking-wider uppercase transition-all shadow-md btn-shimmer touch-press cursor-pointer select-none"
             >
               <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
               <span>Falar no WhatsApp</span>
@@ -240,7 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`xl:hidden p-2 rounded-lg border focus:outline-none transition-colors ${
+              className={`xl:hidden p-2 rounded-xl border focus:outline-none transition-all touch-press ${
                 isDark 
                   ? 'border-[#223049] text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#161f30]' 
                   : 'border-[#cbd5e1] text-[#475569] hover:text-[#0f172a] hover:bg-[#f1f5f9]'
@@ -268,7 +267,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                     key={item.route}
                     id={`mobile-nav-link-${item.route}`}
                     onClick={() => handleNavClick(item.route)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-lg text-sm uppercase tracking-wider font-semibold text-left transition-colors ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm uppercase tracking-wider font-semibold text-left transition-all touch-press cursor-pointer select-none ${
                       isActive
                         ? isDark 
                           ? 'bg-[#182133] text-[#c5a880] border-l-4 border-[#c5a880]' 
@@ -292,7 +291,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   href={lawyerProfile.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border text-xs font-semibold ${
+                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
                     isDark ? 'border-[#223049] text-[#e1306c] bg-[#121824]' : 'border-[#cbd5e1] text-[#e1306c] bg-[#f8fafc]'
                   }`}
                 >
@@ -304,7 +303,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                   href={lawyerProfile.pje1gUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg border text-xs font-semibold ${
+                  className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl border text-xs font-semibold touch-press ${
                     isDark ? 'border-[#223049] text-[#c5a880] bg-[#121824]' : 'border-[#cbd5e1] text-[#8b6225] bg-[#f8fafc]'
                   }`}
                 >
@@ -318,7 +317,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
                 href={getWhatsAppUrl('Olá, Dr. Fagner Silva. Preciso de atendimento criminal em regime de urgência.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#c5a880] text-[#0b0e14] text-xs uppercase tracking-wider font-bold shadow-lg"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#c5a880] text-[#0b0e14] text-xs uppercase tracking-wider font-bold shadow-lg btn-shimmer touch-press cursor-pointer select-none"
               >
                 <ShieldAlert className="w-4 h-4" />
                 <span>Atendimento no WhatsApp</span>
@@ -327,7 +326,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
               <a
                 id="mobile-direct-call"
                 href={`tel:${lawyerProfile.phoneRaw}`}
-                className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border text-xs uppercase tracking-wider font-semibold transition-colors ${
+                className={`w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border text-xs uppercase tracking-wider font-semibold transition-colors touch-press cursor-pointer select-none ${
                   isDark 
                     ? 'border-[#2d3a52] text-[#cbd5e1] hover:bg-[#131b2a]' 
                     : 'border-[#cbd5e1] text-[#334155] hover:bg-[#f1f5f9]'
@@ -343,4 +342,3 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, navigate }) => {
     </>
   );
 };
-
