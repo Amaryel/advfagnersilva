@@ -1,0 +1,6 @@
+{
+  "name": "Dr. Fagner Silva - Advocacia Criminal",
+  "description": "Portal institucional do Dr. Fagner Silva, Advogado Criminalista e Vereador em Isaías Coelho - PI. Atuação em Direito Penal, PJe TJ-PI e Plantão 24h.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
